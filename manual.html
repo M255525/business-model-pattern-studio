@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使用說明｜商業模式組合工作室</title>
+<style>
+:root{--bg:#f5f2ec;--panel:#fff;--border:#e2dccf;--text:#1f2633;--sub:#667085;--navy:#1d3557;--gold:#d99a29;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",sans-serif;line-height:1.75;}
+header{background:linear-gradient(120deg,#13263f,#1d3557 55%,#2b4a75);color:#fff;padding:22px 16px;}
+header div{max-width:860px;margin:0 auto;}
+header h1{margin:0;font-size:1.4rem;}
+header a{color:#f6c46b;font-size:.9rem;}
+main{max-width:860px;margin:0 auto;padding:20px 16px 50px;}
+section{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:16px;}
+h2{margin:0 0 8px;font-size:1.1rem;color:var(--navy);border-left:4px solid var(--gold);padding-left:8px;}
+table{width:100%;border-collapse:collapse;font-size:.9rem;}
+td,th{border:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top;}
+th{background:#f9f7f3;}
+.muted{color:var(--sub);font-size:.86rem;}
+h3{margin:12px 0 4px;font-size:.98rem;color:#2b4a75;}
+.warn{background:#fdf6e8;border:1px solid #f0d9a8;border-radius:10px;padding:8px 14px;}
+.warn ul{margin:0;padding-left:18px;}
+</style>
+</head>
+<body>
+<header><div><h1>📖 商業模式組合工作室｜使用說明</h1><a href="index.html">← 回到工具</a></div></header>
+<main>
+<section>
+  <h2>這個工具在做什麼</h2>
+  <p>輸入一個產品或服務，工具會從<b>經典商業模式</b>（分為策略、營運、獲利、情境四大類）加上 <b>15 個延伸模式</b>（拍賣、會員制、隨選服務、循環經濟等）中，算出每個模式和你產品的適配度，挑出最合適的組合，並用多種方法評價這個商業模式，最後可以下載成 PDF 報告。</p>
+</section>
+<section>
+  <h2>三步驟上手</h2>
+  <ol>
+    <li><b>輸入產品</b>：填產品名稱（必填），再選產業、客戶類型、產品型態、價格帶，寫下目標客群與核心痛點。不知道怎麼填可以先點「範例」。</li>
+    <li><b>產生</b>：
+      <ul>
+        <li>「⚡ 產生商業模式（規則式）」：不需要任何金鑰，馬上出結果，同一筆輸入每次結果都一樣。</li>
+        <li>「✨ AI 產生與評價」：需要先在 ⚙ 常用設定填入自己的 API 金鑰，由 AI 挑選模式並撰寫更貼近你產品的內容。AI 回傳不合格的欄位會自動改用規則式，卡片上會標示「AI」或「規則式」。</li>
+      </ul></li>
+    <li><b>調整與下載</b>：在「模式適配排名」分頁勾選或取消模式，所有評價會即時重算；滿意後按「📄 下載 PDF 報告」，在列印視窗選「另存為 PDF」。</li>
+  </ol>
+</section>
+<section>
+  <h2>多元評價方式</h2>
+  <table>
+    <tr><th>評價</th><th>看什麼</th></tr>
+    <tr><td>商業模式圖</td><td>把組合結果填進九宮格（客群、價值主張、通路、顧客關係、收益、資源、活動、夥伴、成本）。</td></tr>
+    <tr><td>六構面雷達</td><td>市場吸引力、顧客價值、可行性、獲利性、競爭防禦力、擴張性各 1–5 分，綜合分數換算為 A／B／C／D 等級（總分由工具計算，不採用 AI 自報的總分）。</td></tr>
+    <tr><td>綜效與衝突</td><td>檢查所選模式之間是互相加乘（例如免費＋廣告）還是方向衝突（例如超級利基＋規模經濟），並提醒缺少哪一類模式。</td></tr>
+    <tr><td>SWOT</td><td>優勢、劣勢、機會、威脅。</td></tr>
+    <tr><td>五力分析</td><td>同業競爭、新進入者、替代品、買方與供應商議價力的強弱，會依你選的模式調整。</td></tr>
+    <tr><td>財務健檢</td><td>毛利率、顧客終身價值（LTV）、LTV/CAC、獲客成本回收期、損益兩平量。沒填財務數字時用產業預設值估算，並清楚標示。</td></tr>
+    <tr><td>驗證實驗</td><td>依精實創業的做法，對最關鍵的 3 個假設各給一個兩週內可做的 MVP 實驗與成功門檻。</td></tr>
+    <tr><td>個案對照</td><td>列出採用相同模式的知名企業，同時用到多個你選的模式的企業會標為「最相近個案」。</td></tr>
+    <tr><td>模式適配排名</td><td>全部模式的適配度排名，可依類別篩選、展開看說明並勾選調整組合。</td></tr>
+  </table>
+  <p class="muted">要產出哪幾種評價，可以在 ⚙ 常用設定中勾選；PDF 只會包含勾選的評價。</p>
+</section>
+<section>
+  <h2>⚙ 常用設定</h2>
+  <ul>
+    <li><b>AI 服務</b>：支援 Claude、OpenAI、Gemini、OpenRouter，模型可從常用清單挑選或自訂；可按「測試連線」確認金鑰。金鑰只存在你自己瀏覽器的 localStorage，由瀏覽器直接呼叫服務商。</li>
+    <li><b>字級</b>：標準／大／特大。</li>
+    <li><b>每類挑選模式數</b>：策略、營運、獲利、情境各挑幾個（0–3）。</li>
+    <li><b>納入延伸模式</b>、<b>自動存入歷史</b>、<b>顯示跑馬燈</b>。</li>
+    <li><b>我的常用預設值</b>：把目前表單的產業、客戶類型、型態、價格帶與財務數字存成預設，開新表單或按「🧹 清空表單」時自動套用；可隨時恢復內建預設。財務欄位旁會顯示所屬產業的常用值，按「📥 帶入產業常用預設值」可一次填入。</li>
+    <li><b>PDF 報告</b>：封面署名、浮水印開關、是否附上所選模式說明附錄。</li>
+    <li><b>清除本機資料</b>：一次清掉本工具的設定、歷史紀錄與草稿。</li>
+  </ul>
+</section>
+<section>
+  <h2>歷史紀錄與檔案</h2>
+  <p>每次產生的結果可存入歷史（最多 30 筆），也可以匯出成 JSON 檔備份或分享給別人，對方用「⬆ 匯入 JSON」就能打開同一份分析。</p>
+</section>
+<section>
+  <h2>使用警語</h2>
+  <div class="warn">
+  <ul>
+    <li>本工具產生的商業模式組合與評價僅供發想、教學與討論參考，不構成任何投資、創業、融資或經營決策建議，實際可行性請自行查證。</li>
+    <li>評分、財務健檢與五力分析為規則或 AI 推估；財務數字未填時使用產業常用值估算，與實際狀況可能有很大落差。</li>
+    <li>請勿在任何欄位輸入真實個資、公司機密，或不希望被 AI 服務留存的敏感資訊。</li>
+    <li>AI 生成的內容可能包含錯誤或不合時宜的建議，實際使用前務必自行檢查與查證。</li>
+    <li>使用 AI 功能產生的 API 費用由你與所選服務商的方案自行負擔，本工具不會向你收費，也不經手或保存金鑰。</li>
+    <li>個案對照中提到的企業名稱僅為說明模式之用，與本工具無任何合作或背書關係。</li>
+    <li>僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+    <li>本工具與創作者不對使用產生內容後所得之任何結果負責。</li>
+  </ul>
+  </div>
+</section>
+<section id="creator">
+  <h2>創作者資料</h2>
+  <p><strong>Mark Tsai（蔡豐全）</strong></p>
+  <p>聯絡信箱：<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+  <h3>專長</h3>
+  <p>銷售數據分析、AI 工具運用、政府補助計畫申請、創業、跨境電商</p>
+  <h3>證照</h3>
+  <ul>
+    <li>青創總會 創業輔導顧問師班（2013）</li>
+    <li>青創總會 網路行銷講師培訓班（2014）</li>
+    <li>阿里巴巴 P4P 認證講師（2016）</li>
+    <li>iCap 訓練規劃與評量職能基準課程（2017）</li>
+    <li>iCap 職能導向課程申請認證實作班（2023）</li>
+    <li>iPAS AI 應用規劃師－初級（2025）</li>
+    <li>新北市社會局社區數位陪伴員（2025）</li>
+  </ul>
+  <h3>經歷</h3>
+  <ul>
+    <li>勞動力發展署桃竹苗分署 創業顧問（2017－迄今）</li>
+    <li>勞動力發展署（北北基）小型企業人力提升計畫 顧問（2019－迄今）</li>
+    <li>勞動力發展署（桃竹苗）小型企業人力提升計畫 顧問（2019－迄今）</li>
+    <li>農業部農業科技司「科技農企業雙軸轉型躍升發展」科技計畫 業師（2025－2026）</li>
+    <li>勞動力發展署 企業人力資源提升計畫 審查委員（2024）</li>
+    <li>勞動力發展署 職前訓練評鑑計畫 委員（2022）</li>
+    <li>勞動部桃竹苗分署－桃竹苗區域運籌人力資源整合服務計畫 顧問（2022－2023）</li>
+    <li>經濟部中小企業處 SBIR 海選專案 評審委員（2019－2024）</li>
+    <li>勞動力發展署 數位學習課程清單審查會議 審查委員（2024－2025）</li>
+    <li>輔仁大學創新跨領域學院 課務委員（2024－2025）</li>
+    <li>台北市進出口商業同業公會 跨境電商生態村 顧問</li>
+    <li>台灣網商協會 顧問</li>
+    <li>中華職能開發策進會 顧問（2018－2020）</li>
+    <li>新北市汽車美容人員職業工會 顧問（2023－迄今）</li>
+    <li>中華網路行銷講師協會 顧問（2022－迄今）</li>
+    <li>新北市社企電商基地 輔導顧問（2018－2020）</li>
+    <li>阿里巴巴國際站平台 認證講師（2016）</li>
+    <li>巨匠電腦 跨境電子商務班 講師（2016－2017）</li>
+  </ul>
+</section>
+<section>
+  <h2>授權與使用限制</h2>
+  <p>本工具僅供<strong>教學、課程及個人使用</strong>，禁止未經授權公開發布、販售或商業化使用。如需其他用途，請先取得創作者授權。</p>
+</section>
+</main>
+<footer style="max-width:860px;margin:0 auto;padding:0 16px 40px;text-align:center;font-size:.85rem;color:var(--sub)">製作：Mark Tsai（蔡豐全）｜<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a>｜<a href="index.html">回到工具首頁</a></footer>
+</body>
+</html>

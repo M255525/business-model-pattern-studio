@@ -1,0 +1,16 @@
+{
+  "name": "商業模式組合工作室",
+  "short_name": "商業模式組合",
+  "description": "輸入產品或服務，從經典商業模式＋延伸模式組合出商業模式，並多元評價、下載 PDF",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f2ec",
+  "theme_color": "#1d3557",
+  "lang": "zh-TW",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

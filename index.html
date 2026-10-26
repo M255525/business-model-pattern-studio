@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商業模式組合工作室</title>
+<meta name="description" content="輸入產品或服務，從經典商業模式＋延伸模式組合出你的商業模式，並以雷達圖、SWOT、五力、財務健檢等多元方式評價，可下載 PDF。">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1d3557">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="商業模式組合">
+<style>
+:root{
+  --bg:#f5f2ec; --panel:#ffffff; --panel2:#f9f7f3; --border:#e2dccf; --text:#1f2633; --sub:#667085;
+  --navy:#1d3557; --navy2:#2b4a75; --gold:#d99a29; --gold-soft:#fbefd9; --teal:#2a9d8f; --red:#d1495b; --green:#2f9e6b;
+  --c-strategy:#3d5a98; --c-operation:#2a9d8f; --c-revenue:#d99a29; --c-context:#8a5cb8;
+}
+*{box-sizing:border-box;}
+html{font-size:16px;}
+body.fs-l{font-size:17.5px;} body.fs-xl{font-size:19px;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;line-height:1.6;}
+button,input,select,textarea{font:inherit;color:inherit;}
+a{color:var(--navy2);}
+
+#marqueeBar{position:fixed;top:0;left:0;right:0;height:30px;background:#10203a;z-index:2100;overflow:hidden;display:none;align-items:center;}
+#marqueeBar.show{display:flex;}
+#marqueeTrack{display:inline-block;white-space:nowrap;padding-left:100%;font-size:13px;font-weight:600;color:#f6c46b;animation:marquee-scroll 30s linear infinite;}
+#marqueeBar:hover #marqueeTrack{animation-play-state:paused;}
+body.has-marquee{padding-top:30px;}
+@keyframes marquee-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+header{background:linear-gradient(120deg,#13263f,#1d3557 55%,#2b4a75);color:#fff;padding:22px 20px 18px;}
+.hwrap{max-width:1180px;margin:0 auto;display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;}
+header h1{margin:0;font-size:1.5rem;letter-spacing:.5px;}
+header h1 span{color:#f6c46b;}
+header p{margin:6px 0 0;color:#c9d3e3;font-size:.88rem;max-width:640px;}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap;}
+.hbtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:7px 12px;cursor:pointer;font-size:.85rem;text-decoration:none;white-space:nowrap;}
+.hbtn:hover{background:rgba(255,255,255,.22);}
+
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 40px;}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 2px rgba(20,30,50,.04);}
+.panel h2{margin:0 0 14px;font-size:1.08rem;color:var(--navy);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.panel h2 small{font-weight:400;color:var(--sub);font-size:.8rem;}
+.muted{color:var(--sub);font-size:.85rem;}
+
+/* 設定 */
+#settings h3{margin:14px 0 8px;font-size:.92rem;color:var(--navy2);}
+.set-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 18px;}
+.set-row{display:flex;flex-direction:column;gap:4px;font-size:.88rem;}
+.set-row label.inline{display:flex;align-items:center;gap:6px;cursor:pointer;}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.seg button{background:#fff;border:0;padding:5px 12px;cursor:pointer;font-size:.85rem;}
+.seg button.on{background:var(--navy);color:#fff;}
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.count-grid label{font-size:.8rem;display:flex;flex-direction:column;gap:2px;}
+.eval-checks{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;}
+.key-note{font-size:.78rem;color:var(--sub);}
+
+/* 表單 */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 16px;}
+.field{display:flex;flex-direction:column;gap:4px;}
+.field.wide{grid-column:1/-1;}
+.field label{font-size:.85rem;font-weight:600;color:var(--navy2);}
+.field label em{font-style:normal;color:var(--red);}
+input[type=text],input[type=number],input[type=password],select,textarea{border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:#fff;width:100%;min-width:0;}
+textarea{resize:vertical;min-height:62px;}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(43,74,117,.35);border-color:var(--navy2);}
+.samples{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;}
+.chip{border:1px dashed var(--navy2);background:#fff;color:var(--navy2);border-radius:999px;padding:3px 11px;font-size:.8rem;cursor:pointer;}
+.chip:hover{background:var(--gold-soft);}
+details.fin{margin-top:12px;border:1px solid var(--border);border-radius:10px;padding:8px 12px;background:var(--panel2);}
+details.fin summary{cursor:pointer;font-weight:600;color:var(--navy2);font-size:.9rem;}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center;}
+.btn{border:0;border-radius:9px;padding:10px 18px;cursor:pointer;font-weight:600;font-size:.93rem;}
+.btn.primary{background:var(--navy);color:#fff;}
+.btn.primary:hover{background:var(--navy2);}
+.btn.gold{background:var(--gold);color:#fff;}
+.btn.gold:hover{filter:brightness(1.07);}
+.btn.ghost{background:#fff;border:1px solid var(--border);color:var(--navy);}
+.btn.ghost:hover{background:var(--panel2);}
+.btn.small{padding:5px 11px;font-size:.8rem;font-weight:500;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+#aiStatus{font-size:.85rem;color:var(--sub);}
+#aiStatus.err{color:var(--red);}
+
+/* 結果 */
+#result{display:none;}
+.summary-card{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;}
+.grade{width:108px;height:108px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;}
+.grade b{font-size:2.2rem;line-height:1;}
+.grade span{font-size:.8rem;opacity:.9;}
+.g-a{background:var(--green);} .g-b{background:var(--teal);} .g-c{background:var(--gold);} .g-d{background:var(--red);}
+.combo{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+.pill{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:3px 10px;font-size:.8rem;color:#fff;}
+.pill.strategy{background:var(--c-strategy);} .pill.operation{background:var(--c-operation);} .pill.revenue{background:var(--c-revenue);} .pill.context{background:var(--c-context);}
+.pill i{font-style:normal;opacity:.8;font-size:.72rem;}
+.src-badge{display:inline-block;font-size:.7rem;border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:middle;font-weight:500;}
+.src-badge.ai{background:#e3f1ff;color:#1f5f9e;} .src-badge.rule{background:#eee8dc;color:#6d5a35;}
+.stale{background:#fff4e0;border:1px solid #f0c987;color:#7a5410;border-radius:8px;padding:8px 12px;font-size:.85rem;margin-bottom:12px;display:none;}
+
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:2px solid var(--border);margin-bottom:16px;scrollbar-width:thin;}
+.tab{border:0;background:none;padding:9px 13px;cursor:pointer;white-space:nowrap;color:var(--sub);font-size:.9rem;border-bottom:3px solid transparent;margin-bottom:-2px;}
+.tab.on{color:var(--navy);border-bottom-color:var(--gold);font-weight:700;}
+.tabpane{display:none;}
+.tabpane.on{display:block;}
+.pane-tools{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+
+.bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-auto-rows:minmax(120px,auto);gap:6px;}
+.cell{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 11px;font-size:.84rem;}
+.cell h4{margin:0 0 6px;font-size:.82rem;color:var(--navy);}
+.cell ul{margin:0;padding-left:17px;}
+.cell li{margin-bottom:3px;}
+.c-kp{grid-column:1/3;grid-row:1/3;} .c-ka{grid-column:3/5;grid-row:1;} .c-kr{grid-column:3/5;grid-row:2;}
+.c-vp{grid-column:5/7;grid-row:1/3;background:var(--gold-soft);} .c-cr{grid-column:7/9;grid-row:1;} .c-ch{grid-column:7/9;grid-row:2;}
+.c-cs{grid-column:9/11;grid-row:1/3;} .c-cost{grid-column:1/6;grid-row:3;} .c-rev{grid-column:6/11;grid-row:3;}
+
+.dims{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:18px;align-items:start;}
+.radar svg{width:100%;height:auto;}
+.dim-list{display:flex;flex-direction:column;gap:10px;}
+.dim{border:1px solid var(--border);border-radius:10px;padding:9px 12px;background:var(--panel2);}
+.dim-head{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:.92rem;}
+.stars{color:var(--gold);letter-spacing:1px;}
+.dim p{margin:4px 0 0;font-size:.84rem;}
+.dim p.sug{color:var(--navy2);}
+
+.syn{display:flex;flex-direction:column;gap:8px;}
+.syn-item{border-left:4px solid var(--border);padding:6px 12px;background:var(--panel2);border-radius:0 8px 8px 0;font-size:.88rem;}
+.syn-item.pos{border-color:var(--green);} .syn-item.neg{border-color:var(--red);} .syn-item.info{border-color:var(--gold);}
+
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.swot div{border-radius:10px;padding:10px 14px;font-size:.86rem;}
+.swot h4{margin:0 0 6px;font-size:.9rem;}
+.swot ul{margin:0;padding-left:18px;}
+.sw-s{background:#e8f5ee;} .sw-w{background:#fcebec;} .sw-o{background:#e7f0fb;} .sw-t{background:#fdf1dd;}
+
+.forces{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.force{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--panel2);font-size:.85rem;}
+.force h4{margin:0 0 4px;font-size:.9rem;color:var(--navy);display:flex;justify-content:space-between;}
+.lv{border-radius:6px;padding:0 8px;font-size:.75rem;color:#fff;}
+.lv1{background:var(--green);} .lv2{background:var(--gold);} .lv3{background:var(--red);}
+.bar{height:7px;background:#ece6da;border-radius:4px;overflow:hidden;margin:4px 0 6px;}
+.bar i{display:block;height:100%;}
+
+.fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.kpi{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--panel2);}
+.kpi span{font-size:.78rem;color:var(--sub);display:block;}
+.kpi b{font-size:1.3rem;color:var(--navy);}
+.kpi em{font-style:normal;font-size:.76rem;display:block;}
+.ok{color:var(--green);} .warn{color:#b7791f;} .bad{color:var(--red);}
+
+.exp{border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px;background:var(--panel2);font-size:.88rem;}
+.exp h4{margin:0 0 6px;color:var(--navy);font-size:.92rem;}
+.exp dl{margin:0;display:grid;grid-template-columns:92px 1fr;gap:3px 8px;}
+.exp dt{color:var(--sub);}
+.exp dd{margin:0;}
+
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;}
+.case{border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:.86rem;background:var(--panel2);}
+.case h4{margin:0 0 4px;font-size:.9rem;}
+.top-cases{background:var(--gold-soft);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.88rem;}
+
+.rank-tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center;}
+.rank-tools .seg button{font-size:.8rem;}
+.rank-table{width:100%;border-collapse:collapse;font-size:.85rem;}
+.rank-table th,.rank-table td{padding:6px 6px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;}
+.rank-table th{color:var(--sub);font-weight:600;font-size:.78rem;}
+.rank-table tr.sel{background:#fffaf0;}
+.fitbar{width:90px;height:7px;background:#ece6da;border-radius:4px;display:inline-block;vertical-align:middle;overflow:hidden;}
+.fitbar i{display:block;height:100%;background:var(--navy2);}
+.pdesc{color:var(--sub);font-size:.8rem;}
+.rank-table details summary{cursor:pointer;font-weight:600;}
+.rank-table details div{font-size:.8rem;color:var(--text);margin-top:4px;}
+.ext-tag{font-size:.68rem;background:#ece3f5;color:#6a3f97;border-radius:4px;padding:0 5px;margin-left:4px;}
+
+/* 歷史 */
+#historyPanel{display:none;}
+.hist-item{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--border);padding:7px 0;font-size:.88rem;flex-wrap:wrap;}
+.hist-item .btns{display:flex;gap:6px;}
+
+footer{max-width:1180px;margin:0 auto;padding:10px 16px 50px;text-align:center;font-size:.8rem;color:var(--sub);}
+footer img{vertical-align:middle;}
+footer{display:flex;flex-direction:column;gap:14px;}
+.warn-box{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:12px;padding:14px 18px;text-align:left;color:var(--sub);font-size:.82rem;}
+.warn-box strong{display:block;color:var(--navy);margin-bottom:6px;font-size:.9rem;}
+.warn-box ul{margin:0;padding-left:18px;line-height:1.75;}
+.creator-box{font-size:.84rem;color:var(--text);}
+.creator-box a{color:var(--navy2);}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:10px 18px;border-radius:9px;font-size:.88rem;opacity:0;pointer-events:none;transition:.25s;z-index:3000;max-width:90vw;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite;vertical-align:-2px;margin-right:6px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+
+@media (max-width:820px){
+  .bmc{grid-template-columns:1fr 1fr;grid-auto-rows:auto;}
+  .bmc .cell{grid-column:auto !important;grid-row:auto !important;}
+  .bmc .c-vp,.bmc .c-cost,.bmc .c-rev{grid-column:1/-1 !important;}
+  .dims{grid-template-columns:1fr;}
+  .summary-card{grid-template-columns:1fr;justify-items:start;}
+  .count-grid{grid-template-columns:repeat(2,1fr);}
+  .rank-table .hide-m{display:none;}
+}
+@media (max-width:520px){
+  .swot{grid-template-columns:1fr;}
+  .exp dl{grid-template-columns:1fr;}
+  header h1{font-size:1.25rem;}
+}
+
+/* 列印／PDF */
+#printReport{display:none;}
+#pdfWatermark{display:none;}
+@page{size:A4;margin:14mm 12mm;}
+@media print{
+  body{background:#fff;padding-top:0 !important;font-size:12px;}
+  body > *:not(#printReport):not(#pdfWatermark){display:none !important;}
+  #printReport{display:block;}
+  body.wm-on #pdfWatermark{display:flex !important;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;pointer-events:none;}
+  #pdfWatermark img{width:42%;min-width:200px;max-width:380px;opacity:.11;}
+  .pr-sec{break-inside:auto;margin-bottom:14px;}
+  .pr-sec h2{break-after:avoid;}
+  .cell,.dim,.exp,.force,.case,.kpi,.syn-item,.swot div{break-inside:avoid;}
+  .tabs,.pane-tools,.btn{display:none !important;}
+  /* A4 寬度會觸發手機版斷點，列印時強制回到九宮格版面 */
+  #printReport .bmc{grid-template-columns:repeat(10,1fr) !important;grid-auto-rows:auto;font-size:10.5px;}
+  #printReport .c-kp{grid-column:1/3 !important;grid-row:1/3 !important;} #printReport .c-ka{grid-column:3/5 !important;grid-row:1 !important;}
+  #printReport .c-kr{grid-column:3/5 !important;grid-row:2 !important;} #printReport .c-vp{grid-column:5/7 !important;grid-row:1/3 !important;}
+  #printReport .c-cr{grid-column:7/9 !important;grid-row:1 !important;} #printReport .c-ch{grid-column:7/9 !important;grid-row:2 !important;}
+  #printReport .c-cs{grid-column:9/11 !important;grid-row:1/3 !important;} #printReport .c-cost{grid-column:1/6 !important;grid-row:3 !important;}
+  #printReport .c-rev{grid-column:6/11 !important;grid-row:3 !important;}
+  #printReport .cell{padding:6px 7px;font-size:10.5px;} #printReport .cell ul{padding-left:13px;}
+  #printReport .dims{grid-template-columns:220px 1fr !important;}
+  #printReport .swot{grid-template-columns:1fr 1fr !important;}
+}
+#printReport .pr-cover{border-bottom:3px solid var(--navy);padding-bottom:10px;margin-bottom:14px;}
+#printReport .pr-cover h1{margin:0;font-size:22px;color:var(--navy);}
+#printReport .pr-cover p{margin:3px 0;color:#444;}
+#printReport h2{font-size:15px;color:var(--navy);border-left:4px solid var(--gold);padding-left:8px;margin:16px 0 8px;}
+#printReport .dims{grid-template-columns:240px 1fr;}
+#printReport table{width:100%;border-collapse:collapse;font-size:11px;}
+#printReport td,#printReport th{border:1px solid #ddd;padding:4px 6px;text-align:left;vertical-align:top;}
+</style>
+</head>
+<body>
+
+<div id="marqueeBar"><div id="marqueeTrack"></div></div>
+
+<header>
+  <div class="hwrap">
+    <div>
+      <h1>商業模式<span>組合工作室</span></h1>
+      <p>輸入一個產品或服務，從經典商業模式＋延伸模式中挑出最適合的組合，再用雷達圖、綜效檢查、SWOT、五力、財務健檢與驗證實驗多角度評價，可下載 PDF。</p>
+    </div>
+    <div class="hbtns">
+      <a class="hbtn" href="manual.html" target="_blank" rel="noopener">📖 使用說明</a>
+      <button class="hbtn" id="historyBtn" type="button">🗂 歷史紀錄</button>
+      <button class="hbtn" id="settingsBtn" type="button" aria-expanded="false" aria-controls="settings">⚙ 常用設定</button>
+      <button class="hbtn" id="installBtn" type="button">📲 安裝</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="panel" id="settings" hidden>
+    <h2>⚙ 常用設定 <small>設定只存在你這台裝置的瀏覽器</small></h2>
+    <h3>AI 服務（選填，自備金鑰）</h3>
+    <div class="set-grid">
+      <div class="set-row"><span>服務商</span><select id="aiProvider"></select></div>
+      <div class="set-row"><span>模型</span><select id="aiModel"></select><input type="text" id="aiModelCustom" placeholder="輸入模型 ID" style="display:none"></div>
+      <div class="set-row"><span>API 金鑰</span><input type="password" id="aiKey" placeholder="貼上金鑰" autocomplete="off">
+        <span class="key-note">金鑰只存在本機 localStorage，直接從瀏覽器呼叫服務商，不經過任何第三方伺服器。</span></div>
+      <div class="set-row"><span>&nbsp;</span><button class="btn ghost small" type="button" id="testAiBtn">🔌 測試連線</button><span id="testAiMsg" class="key-note"></span></div>
+    </div>
+    <h3>顯示與產生</h3>
+    <div class="set-grid">
+      <div class="set-row"><span>字級</span>
+        <div class="seg" id="fsSeg"><button type="button" data-fs="">標準</button><button type="button" data-fs="l">大</button><button type="button" data-fs="xl">特大</button></div></div>
+      <div class="set-row"><span>每類挑選模式數</span>
+        <div class="count-grid">
+          <label>策略<select data-count="strategy"></select></label>
+          <label>營運<select data-count="operation"></select></label>
+          <label>獲利<select data-count="revenue"></select></label>
+          <label>情境<select data-count="context"></select></label>
+        </div></div>
+      <div class="set-row"><label class="inline"><input type="checkbox" id="setExt"> 納入延伸模式（15 個）</label>
+        <label class="inline"><input type="checkbox" id="setAutoSave"> 產生後自動存入歷史紀錄</label>
+        <label class="inline"><input type="checkbox" id="setMarquee"> 顯示頂部跑馬燈公告</label></div>
+    </div>
+    <h3>要產出的評價</h3>
+    <div class="eval-checks" id="evalChecks"></div>
+    <h3>我的常用預設值 <small class="key-note">（新表單、按「清空表單」時自動套用）</small></h3>
+    <div class="set-grid">
+      <div class="set-row"><span>目前預設</span><div class="key-note" id="defaultsSummary"></div></div>
+      <div class="set-row"><span>&nbsp;</span>
+        <button class="btn ghost small" type="button" id="saveDefaultsBtn">📌 把目前表單存成常用預設</button>
+        <button class="btn ghost small" type="button" id="resetDefaultsBtn" style="margin-top:6px">↺ 恢復內建預設</button></div>
+    </div>
+    <h3>PDF 報告</h3>
+    <div class="set-grid">
+      <div class="set-row"><span>報告署名（顯示在封面）</span><input type="text" id="setAuthor" placeholder="例如：王小明／○○顧問"></div>
+      <div class="set-row"><label class="inline"><input type="checkbox" id="setWatermark"> PDF 加浮水印</label>
+        <label class="inline"><input type="checkbox" id="setAppendix"> PDF 附錄列出所選模式說明</label></div>
+      <div class="set-row"><span>&nbsp;</span><button class="btn ghost small" type="button" id="clearLocalBtn">🗑 清除本機資料（設定、歷史、草稿）</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="historyPanel">
+    <h2>🗂 歷史紀錄 <small>最多保留 30 筆</small></h2>
+    <div class="actions" style="margin-top:0;margin-bottom:8px">
+      <button class="btn ghost small" type="button" id="exportAllBtn">⬇ 匯出全部（JSON）</button>
+      <label class="btn ghost small" style="cursor:pointer">⬆ 匯入 JSON<input type="file" id="importFile" accept=".json,application/json" hidden></label>
+    </div>
+    <div id="historyList"></div>
+  </section>
+
+  <section class="panel">
+    <h2>① 輸入產品或服務</h2>
+    <div class="samples"><span class="muted">範例：</span><span id="sampleChips"></span></div>
+    <div class="form-grid">
+      <div class="field wide"><label for="fProduct">產品／服務名稱 <em>*</em></label><input type="text" id="fProduct" placeholder="例如：手搖飲品牌、中小企業雲端記帳軟體、到府寵物照護"></div>
+      <div class="field"><label for="fIndustry">產業</label><select id="fIndustry"><option value="">自動判斷</option></select></div>
+      <div class="field"><label for="fBiz">客戶類型</label><select id="fBiz"><option value="b2c">B2C 消費者</option><option value="b2b">B2B 企業</option><option value="both">兩者都有</option></select></div>
+      <div class="field"><label for="fForm">產品型態</label><select id="fForm"><option value="physical">實體商品</option><option value="digital">數位／軟體</option><option value="service">服務</option><option value="mixed">混合</option></select></div>
+      <div class="field"><label for="fPrice">價格帶</label><select id="fPrice"><option value="low">平價</option><option value="mid" selected>中價位</option><option value="high">高價位</option></select></div>
+      <div class="field"><label for="fTarget">目標客群</label><input type="text" id="fTarget" placeholder="例如：20–35 歲上班族"></div>
+      <div class="field"><label for="fPain">核心痛點</label><input type="text" id="fPain" placeholder="顧客最困擾的是什麼？"></div>
+      <div class="field wide"><label for="fResources">既有資源（選填）</label><input type="text" id="fResources" placeholder="例如：自有工廠、2 萬人社群、專利技術、門市據點"></div>
+    </div>
+    <details class="fin">
+      <summary>💰 財務數字（選填，用於財務健檢；沒填會用產業預設值估算）</summary>
+      <div class="actions" style="margin-top:8px">
+        <button class="btn ghost small" type="button" id="fillFinBtn">📥 帶入產業常用預設值</button>
+        <span class="key-note" id="finHint"></span>
+      </div>
+      <div class="form-grid" style="margin-top:10px">
+        <div class="field"><label for="nPrice">平均單價（元）</label><input type="number" id="nPrice" min="0"></div>
+        <div class="field"><label for="nCost">單位變動成本（元）</label><input type="number" id="nCost" min="0"></div>
+        <div class="field"><label for="nCac">獲客成本 CAC（元／人）</label><input type="number" id="nCac" min="0"></div>
+        <div class="field"><label for="nFreq">每位顧客年購買次數</label><input type="number" id="nFreq" min="0" step="0.5"></div>
+        <div class="field"><label for="nYears">顧客平均留存年數</label><input type="number" id="nYears" min="0" step="0.5"></div>
+        <div class="field"><label for="nFixed">每月固定成本（元）</label><input type="number" id="nFixed" min="0"></div>
+      </div>
+    </details>
+    <div class="actions">
+      <button class="btn primary" type="button" id="genRuleBtn">⚡ 產生商業模式（規則式）</button>
+      <button class="btn gold" type="button" id="genAiBtn">✨ AI 產生與評價</button>
+      <button class="btn ghost" type="button" id="resetFormBtn">🧹 清空表單（套用常用預設）</button>
+      <span id="aiStatus"></span>
+    </div>
+  </section>
+
+  <section class="panel" id="result">
+    <div class="stale" id="staleNote">模式組合已手動調整，AI 撰寫的內容已改回規則式結果；想讓 AI 依新組合重寫，請再按一次「✨ AI 產生與評價」。</div>
+    <div class="summary-card">
+      <div class="grade" id="gradeBadge"><b id="gradeLetter">–</b><span id="gradeScore"></span></div>
+      <div>
+        <h2 style="margin:0 0 4px" id="resTitle"></h2>
+        <div class="combo" id="comboPills"></div>
+        <p style="margin:4px 0 0;font-size:.9rem" id="resSummary"></p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" type="button" id="pdfBtn">📄 下載 PDF 報告</button>
+      <button class="btn ghost" type="button" id="saveBtn">💾 存入歷史</button>
+      <button class="btn ghost" type="button" id="exportOneBtn">⬇ 匯出 JSON</button>
+    </div>
+    <div class="tabs" id="tabs" style="margin-top:16px"></div>
+    <div id="panes"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="warn-box">
+    <strong>⚠️ 使用警語</strong>
+    <ul>
+      <li>本工具產生的商業模式組合與評價僅供發想、教學與討論參考，不構成任何投資、創業、融資或經營決策建議，實際可行性請自行查證。</li>
+      <li>評分、財務健檢與五力分析為規則或 AI 推估，財務數字未填時使用產業常用值估算，與實際狀況可能有很大落差。</li>
+      <li>請勿在任何欄位輸入真實個資、公司機密或受著作權保護的他人內容。表單、設定與歷史紀錄只存在你自己瀏覽器的 localStorage，不會上傳到本工具的任何伺服器。</li>
+      <li>填有 API 金鑰時，產品資訊會直接從你的瀏覽器送到你選擇的 AI 服務商；金鑰只存在你的瀏覽器，本工具不經手、不保存，也不向你收取任何費用，API 費用依你與服務商的方案計算。</li>
+      <li>AI 生成內容可能有誤或不合時宜，使用前請自行檢查與查證；本工具與創作者不對使用產生內容後所得之任何結果負責。</li>
+      <li>個案對照中提到的企業名稱僅為說明模式之用，與本工具無任何合作或背書關係。</li>
+      <li>僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+    </ul>
+  </div>
+  <div class="creator-box">製作：<strong>Mark Tsai（蔡豐全）</strong>｜<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a>｜完整經歷見<a href="manual.html#creator">使用說明</a></div>
+  <div style="margin-top:8px"><img src="https://visitor-badge.laobi.icu/badge?page_id=m255525.business-model-pattern-studio" alt="訪客計數" loading="lazy"></div>
+</footer>
+
+<div id="printReport"></div>
+<div id="pdfWatermark"><img id="wmImg" src="watermark.png" alt=""></div>
+<div class="toast" id="toast"></div>
+
+<script src="patterns.js"></script>
+<script>
+(function(){
+'use strict';
+var B = window.BMP;
+var PATTERNS = B.PATTERNS, BYID = {};
+PATTERNS.forEach(function(p){ BYID[p.id] = p; });
+var CATS = ['strategy','operation','revenue','context'];
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
+function hashString(s){ var h = 5381; for(var i=0;i<s.length;i++){ h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; } return h; }
+var toastTimer;
+function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove('show'); }, 3200); }
+
+/* ================= 設定 ================= */
+var PREFIX = 'bmPatternStudio.';
+var SET_KEY = PREFIX + 'settings', HIST_KEY = PREFIX + 'history', DRAFT_KEY = PREFIX + 'draft';
+var EVALS = [
+  {id:'bmc', label:'商業模式圖'}, {id:'dims', label:'六構面雷達'}, {id:'syn', label:'綜效與衝突'},
+  {id:'swot', label:'SWOT'}, {id:'forces', label:'五力分析'}, {id:'fin', label:'財務健檢'},
+  {id:'exp', label:'驗證實驗'}, {id:'cases', label:'個案對照'}, {id:'rank', label:'模式適配排名'}
+];
+var DEFAULTS = { provider:'claude', model:'', apiKey:'', fs:'', counts:{strategy:2,operation:2,revenue:2,context:2},
+  includeExt:true, evals:{}, author:'', watermark:true, appendix:true, autoSave:true, marquee:true,
+  formDefaults:{fIndustry:'', fBiz:'b2c', fForm:'physical', fPrice:'mid'} };
+EVALS.forEach(function(e){ DEFAULTS.evals[e.id] = true; });
+var settings = loadSettings();
+function loadSettings(){
+  var s = JSON.parse(JSON.stringify(DEFAULTS));
+  try{
+    var saved = JSON.parse(localStorage.getItem(SET_KEY) || '{}');
+    Object.keys(saved).forEach(function(k){
+      if(k === 'counts' || k === 'evals') Object.assign(s[k], saved[k] || {});
+      else if(k === 'formDefaults') s[k] = Object.assign({}, DEFAULTS.formDefaults, saved[k] || {});
+      else s[k] = saved[k];
+    });
+  }catch(e){}
+  return s;
+}
+function saveSettings(){ try{ localStorage.setItem(SET_KEY, JSON.stringify(settings)); }catch(e){} }
+
+/* ================= AI 常用模型清單 ================= */
+var AI_PROVIDERS = {
+  claude:     {label:'Claude（Anthropic）',       defaultModel:'claude-sonnet-5-5'},
+  openai:     {label:'OpenAI',                    defaultModel:'gpt-5-mini'},
+  gemini:     {label:'Gemini（Google AI Studio）', defaultModel:'gemini-3.5-flash'},
+  openrouter: {label:'OpenRouter',                defaultModel:'openai/gpt-4o-mini'}
+};
+var MODEL_OPTIONS = {
+  claude: [
+    {value:'claude-opus-5-5', label:'Claude Opus 5.5（最強）'},
+    {value:'claude-sonnet-5-5', label:'Claude Sonnet 5.5（均衡，推薦）'},
+    {value:'claude-haiku-5-5', label:'Claude Haiku 5.5（快速省錢）'},
+    {value:'claude-fable-5-1', label:'Claude Fable 5.1'}
+  ],
+  openai: [
+    {value:'gpt-5', label:'GPT-5（最強）'},
+    {value:'gpt-5-mini', label:'GPT-5 mini（均衡，推薦）'},
+    {value:'gpt-4o-mini', label:'GPT-4o mini（快速省錢）'},
+    {value:'o3-mini', label:'o3-mini（推理強化）'}
+  ],
+  gemini: [
+    {value:'gemini-3.5-pro', label:'Gemini 3.5 Pro（最強）'},
+    {value:'gemini-3.5-flash', label:'Gemini 3.5 Flash（均衡，推薦）'},
+    {value:'gemini-2.5-flash', label:'Gemini 2.5 Flash（快速省錢）'}
+  ],
+  openrouter: [
+    {value:'openai/gpt-4o-mini', label:'OpenAI GPT-4o mini（推薦）'},
+    {value:'anthropic/claude-sonnet-4.5', label:'Anthropic Claude Sonnet 4.5'},
+    {value:'google/gemini-2.5-flash', label:'Google Gemini 2.5 Flash'},
+    {value:'meta-llama/llama-3.3-70b-instruct', label:'Meta Llama 3.3 70B（常見免費/低價選項）'}
+  ]
+};
+function getResolvedModel(){
+  var sel = $('aiModel').value;
+  return sel === 'custom' ? $('aiModelCustom').value.trim() : sel;
+}
+function persistApiConfig(){
+  settings.provider = $('aiProvider').value;
+  settings.model = getResolvedModel();
+  settings.apiKey = $('aiKey').value.trim();
+  saveSettings(); refreshAiBtn();
+}
+function syncModelCustomVisibility(){ $('aiModelCustom').style.display = $('aiModel').value === 'custom' ? 'block' : 'none'; }
+function renderModelOptions(provider, presetModel){
+  var opts = MODEL_OPTIONS[provider] || [];
+  var sel = $('aiModel');
+  sel.innerHTML = opts.map(function(o){ return '<option value="' + o.value + '">' + esc(o.label) + '</option>'; }).join('')
+    + '<option value="custom">✏️ 自訂模型名稱…</option>';
+  var matched = presetModel && opts.some(function(o){ return o.value === presetModel; });
+  if(matched){ sel.value = presetModel; $('aiModelCustom').value = ''; }
+  else if(presetModel){ sel.value = 'custom'; $('aiModelCustom').value = presetModel; }
+  else { sel.value = AI_PROVIDERS[provider].defaultModel; $('aiModelCustom').value = ''; }
+  syncModelCustomVisibility();
+}
+function refreshAiBtn(){
+  var has = !!settings.apiKey;
+  $('genAiBtn').title = has ? '' : '請先在 ⚙ 常用設定填入 API 金鑰';
+}
+
+/* ================= AI 呼叫（四家 BYOK，沿用 social-post-grader） ================= */
+async function callLLM(provider, model, apiKey, prompt, onRetry){
+  var url, headers, body, extract;
+  if(provider === 'claude'){
+    url = 'https://api.anthropic.com/v1/messages';
+    headers = {'content-type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
+    body = {model: model, max_tokens: 8000, messages: [{role:'user', content: prompt}]};
+    extract = function(d){
+      if(d.stop_reason === 'refusal') throw new Error('模型拒絕了這個請求（refusal）');
+      var t = (d.content || []).filter(function(b){ return b.type === 'text'; }).map(function(b){ return b.text; }).join('');
+      if(!t) throw new Error('回應中沒有文字內容');
+      return t;
+    };
+  } else if(provider === 'openai'){
+    url = 'https://api.openai.com/v1/chat/completions';
+    headers = {'content-type':'application/json','authorization':'Bearer ' + apiKey};
+    body = {model: model, messages: [{role:'user', content: prompt}]};
+    extract = function(d){
+      var t = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
+      if(!t) throw new Error('回應中沒有文字內容');
+      return t;
+    };
+  } else if(provider === 'gemini'){
+    url = 'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent';
+    headers = {'content-type':'application/json','x-goog-api-key':apiKey};
+    body = {contents: [{parts: [{text: prompt}]}]};
+    extract = function(d){
+      var parts = (d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts) || [];
+      var t = parts.map(function(p){ return p.text || ''; }).join('');
+      if(!t) throw new Error('回應中沒有文字內容');
+      return t;
+    };
+  } else if(provider === 'openrouter'){
+    url = 'https://openrouter.ai/api/v1/chat/completions';
+    headers = {'content-type':'application/json','authorization':'Bearer ' + apiKey};
+    body = {model: model, messages: [{role:'user', content: prompt}]};
+    extract = function(d){
+      var t = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
+      if(!t) throw new Error('回應中沒有文字內容');
+      return t;
+    };
+  } else {
+    throw new Error('不支援的服務商');
+  }
+  var RETRYABLE = {429:1, 500:1, 503:1, 529:1};
+  var MAX_TRIES = 3;
+  for(var attempt = 1; attempt <= MAX_TRIES; attempt++){
+    var resp = await fetch(url, {method:'POST', headers:headers, body:JSON.stringify(body), signal: AbortSignal.timeout(180000)});
+    var raw = await resp.text();
+    if(resp.ok) return extract(JSON.parse(raw));
+    var msg = raw.slice(0, 300);
+    try{ var err = JSON.parse(raw); msg = (err.error && err.error.message) || err.message || msg; }catch(e){}
+    if(RETRYABLE[resp.status] && attempt < MAX_TRIES){
+      var waitSec = attempt * 8;
+      if(onRetry) onRetry(attempt, resp.status, waitSec);
+      await new Promise(function(r){ setTimeout(r, waitSec * 1000); });
+      continue;
+    }
+    if(resp.status === 401 || resp.status === 403) msg += '——這通常表示 API 金鑰不正確、已失效，或貼的金鑰跟選的服務商不對應，請確認金鑰是否貼對';
+    if(resp.status === 404) msg += '——這通常表示模型名稱錯誤或已停用，請確認目前可用的模型 ID';
+    if(RETRYABLE[resp.status]) msg += '——已自動重試 ' + (MAX_TRIES - 1) + ' 次仍失敗，多為服務商暫時過載，請稍候再試或更換模型／服務商';
+    throw new Error('API 回應 ' + resp.status + '：' + msg);
+  }
+}
+function extractJsonObject(text){
+  var cleaned = text.replace(/```json|```/g, '');
+  var start = cleaned.indexOf('{');
+  var end = cleaned.lastIndexOf('}');
+  if(start < 0 || end <= start) throw new Error('模型輸出中找不到 JSON 物件：' + text.slice(0, 120));
+  return JSON.parse(cleaned.slice(start, end + 1));
+}
+
+/* ================= 輸入 ================= */
+var INPUT_IDS = ['fProduct','fIndustry','fBiz','fForm','fPrice','fTarget','fPain','fResources','nPrice','nCost','nCac','nFreq','nYears','nFixed'];
+function readInput(){
+  var o = {};
+  INPUT_IDS.forEach(function(id){ o[id] = $(id).value.trim(); });
+  return o;
+}
+function writeInput(o){
+  INPUT_IDS.forEach(function(id){ if(o && o[id] != null) $(id).value = o[id]; else if(o) $(id).value = $(id).tagName === 'SELECT' ? $(id).options[0].value : ''; });
+  if(o && !o.fPrice) $('fPrice').value = 'mid';
+}
+function industryOf(inp){
+  if(inp.fIndustry && B.INDUSTRIES[inp.fIndustry]) return inp.fIndustry;
+  var text = [inp.fProduct, inp.fTarget, inp.fPain, inp.fResources].join(' ');
+  var best = 'other', bestN = 0;
+  Object.keys(B.INDUSTRIES).forEach(function(k){
+    var n = 0; B.INDUSTRIES[k].kw.forEach(function(w){ if(text.indexOf(w) >= 0) n++; });
+    if(n > bestN){ bestN = n; best = k; }
+  });
+  return best;
+}
+
+/* ================= 規則式引擎 ================= */
+var KW_ATTR = [
+  [/訂閱|每月|定期|月費|耗材|補充/, 'r', .6], [/社群|粉絲|會員|愛好者|社團/, 'cm', .6], [/平台|媒合|撮合|雙邊|市集|二手|交易/, 'pl', .9],
+  [/在地|門市|店|據點|社區|到府/, 'l', .5], [/資料|數據|AI|演算法|分析/, 'da', .6], [/小眾|專業|特定|利基|職人|精品/, 'n', .6],
+  [/大眾|全台|國際|海外|跨境|全球/, 'sc', .5], [/企業|公司|B2B|老闆|採購/, 'b', .4], [/高端|精品|頂級|奢華/, 'hi', .5], [/平價|便宜|小資|學生/, 'lo', .5]
+];
+function attrsOf(inp, ind){
+  var a = {d:0,p:0,s:0,b:0,c:0,pl:0,hi:0,lo:0,r:0,l:0,da:0,cm:0,n:0,sc:0};
+  var base = B.INDUSTRIES[ind].attr;
+  Object.keys(base).forEach(function(k){ a[k] = base[k]; });
+  var biz = inp.fBiz || 'b2c';
+  if(biz === 'b2b'){ a.b = Math.max(a.b,1); a.c = Math.min(a.c,.2); }
+  else if(biz === 'b2c'){ a.c = Math.max(a.c,1); a.b = Math.min(a.b,.2); }
+  else { a.b = Math.max(a.b,.7); a.c = Math.max(a.c,.7); }
+  var form = inp.fForm || 'physical';
+  if(form === 'physical'){ a.p = Math.max(a.p,1); a.d = Math.min(a.d,.4); }
+  else if(form === 'digital'){ a.d = Math.max(a.d,1); a.p = Math.min(a.p,.1); }
+  else if(form === 'service'){ a.s = Math.max(a.s,1); a.p = Math.min(a.p,.3); }
+  else { a.p = Math.max(a.p,.6); a.d = Math.max(a.d,.5); a.s = Math.max(a.s,.5); }
+  if(inp.fPrice === 'low'){ a.lo = Math.max(a.lo,1); a.hi = 0; a.sc = Math.max(a.sc,.5); }
+  else if(inp.fPrice === 'high'){ a.hi = Math.max(a.hi,1); a.lo = 0; a.n = Math.max(a.n,.4); }
+  var text = [inp.fProduct, inp.fTarget, inp.fPain, inp.fResources].join(' ');
+  KW_ATTR.forEach(function(r){ if(r[0].test(text)) a[r[1]] = Math.min(1.2, a[r[1]] + r[2]); });
+  return a;
+}
+/* 爭議大或適用面窄的模式，除非條件非常吻合，否則不優先推薦 */
+var CAUTION = {S21:1.5, R39:.5, C58:.3, S13:.2, C53:.2};
+function rankPatterns(inp, ind, attrs){
+  var seed = inp.fProduct + '|' + ind;
+  var rows = PATTERNS.filter(function(p){ return settings.includeExt || p.book; }).map(function(p){
+    /* 以標籤向量長度正規化，避免標籤多的模式天生高分；主要標籤和產品屬性不符時扣分 */
+    var dot = 0, norm = 0, topW = 0;
+    Object.keys(p.tags).forEach(function(k){
+      var w = p.tags[k];
+      dot += w * (attrs[k] || 0); norm += w * w;
+      if(w > topW) topW = w;
+    });
+    var s = norm ? dot / Math.sqrt(norm) : 0;
+    var topFit = 0;
+    Object.keys(p.tags).forEach(function(k){ if(p.tags[k] === topW) topFit = Math.max(topFit, attrs[k] || 0); });
+    if(topW > 0 && topFit < .4) s -= .6;
+    if(p.ind.indexOf(ind) >= 0) s += .7;
+    if(!p.ind.length) s += .25; /* 通用模式 */
+    if(CAUTION[p.id]) s -= CAUTION[p.id];
+    s += (hashString(seed + '::' + p.id) % 100) / 1000; /* 同分時的確定性排序 */
+    return {id:p.id, raw:s};
+  });
+  var max = Math.max.apply(null, rows.map(function(r){ return r.raw; }));
+  var min = Math.min.apply(null, rows.map(function(r){ return r.raw; }));
+  rows.forEach(function(r){ r.fit = Math.round(15 + 85 * (r.raw - min) / ((max - min) || 1)); });
+  rows.sort(function(a,b){ return b.raw - a.raw; });
+  return rows;
+}
+function synergyOf(a, b){
+  for(var i=0;i<B.SYNERGY.length;i++){
+    var s = B.SYNERGY[i];
+    if((s[0]===a && s[1]===b) || (s[0]===b && s[1]===a)) return s;
+  }
+  return null;
+}
+function autoSelect(ranking){
+  var sel = [];
+  CATS.forEach(function(cat){
+    var need = Number(settings.counts[cat]) || 0, got = 0;
+    for(var i=0;i<ranking.length && got<need;i++){
+      var p = BYID[ranking[i].id];
+      if(p.cat !== cat) continue;
+      var clash = sel.some(function(id){ var s = synergyOf(id, p.id); return s && s[2] <= -2; });
+      if(clash) continue;
+      sel.push(p.id); got++;
+    }
+  });
+  return sel;
+}
+function fill(t, ctx){ return String(t).replace(/\{P\}/g, ctx.product); }
+
+var BOXES = [
+  {k:'kp', label:'關鍵夥伴 KP'}, {k:'ka', label:'關鍵活動 KA'}, {k:'kr', label:'關鍵資源 KR'},
+  {k:'vp', label:'價值主張 VP'}, {k:'cr', label:'顧客關係 CR'}, {k:'ch', label:'通路 CH'},
+  {k:'cs', label:'目標客群 CS'}, {k:'cost', label:'成本結構 C$'}, {k:'rev', label:'收益流 R$'}
+];
+var DIMS = [
+  {id:'m', label:'市場吸引力', w:.18}, {id:'v', label:'顧客價值', w:.2}, {id:'f', label:'可行性', w:.16},
+  {id:'p', label:'獲利性', w:.2}, {id:'d', label:'競爭防禦力', w:.14}, {id:'x', label:'擴張性', w:.12}
+];
+var FORCES = [
+  {k:'rival', label:'同業競爭'}, {k:'entrant', label:'新進入者威脅'}, {k:'sub', label:'替代品威脅'},
+  {k:'buyer', label:'買方議價力'}, {k:'supplier', label:'供應商議價力'}
+];
+var LV_TXT = {1:'弱', 2:'中', 3:'強'};
+
+function ruleBmc(ctx, sel){
+  var ind = B.INDUSTRIES[ctx.ind].bmc, out = {};
+  BOXES.forEach(function(b){ out[b.k] = []; });
+  out.cs.push(ctx.target || ind.cs);
+  if(ctx.target && ind.cs) out.cs.push('延伸客群：' + ind.cs);
+  out.vp.push(ctx.pain ? '為' + (ctx.target || '目標客群') + '解決「' + ctx.pain + '」' : '提供' + ctx.product + '的核心價值');
+  BOXES.forEach(function(b){ if(b.k !== 'cs' && b.k !== 'vp' && ind[b.k]) out[b.k].push(ind[b.k]); });
+  if(ctx.resources) out.kr.push('既有資源：' + ctx.resources);
+  sel.forEach(function(id){
+    var p = BYID[id];
+    out[p.box].push('【' + p.name + '】' + fill(p.how, ctx));
+    if(p.box !== 'vp' && (p.cat === 'strategy' || p.cat === 'revenue')) out.vp.push(p.pro + '（' + p.name + '）');
+  });
+  return out;
+}
+function avgEv(sel){
+  var sum = {}; DIMS.forEach(function(d){ sum[d.id] = 0; });
+  sel.forEach(function(id){ var ev = BYID[id].ev; DIMS.forEach(function(d){ sum[d.id] += ev[d.id] || 0; }); });
+  DIMS.forEach(function(d){ sum[d.id] = sel.length ? sum[d.id] / sel.length : 0; });
+  return sum;
+}
+function synergyList(sel){
+  var out = [];
+  for(var i=0;i<sel.length;i++) for(var j=i+1;j<sel.length;j++){
+    var s = synergyOf(sel[i], sel[j]);
+    if(s) out.push({a:s[0], b:s[1], v:s[2], txt:s[3]});
+  }
+  return out;
+}
+function ruleDims(ctx, sel, attrs, synTotal, fin){
+  var ev = avgEv(sel), out = {};
+  var forces = B.INDUSTRIES[ctx.ind].forces;
+  DIMS.forEach(function(d){
+    var s = 3 + ev[d.id] * 1.1;
+    if(d.id === 'd' || d.id === 'p') s += synTotal * .15;
+    if(d.id === 'd') s -= (forces.rival - 2) * .3;
+    if(d.id === 'm' && attrs.sc > .6) s += .3;
+    if(d.id === 'm' && attrs.n > .6) s -= .2;
+    if(d.id === 'p' && fin){ if(fin.ratio >= 3) s += .4; else if(fin.ratio < 1) s -= .6; }
+    if(d.id === 'f' && ctx.resources) s += .3;
+    s += ((hashString(ctx.product + '::' + d.id) % 5) - 2) * .08;
+    var score = clamp(Math.round(s), 1, 5);
+    var best = null, worst = null;
+    sel.forEach(function(id){ var v = BYID[id].ev[d.id] || 0; if(v > 0 && (!best || v > best.v)) best = {id:id, v:v}; if(v < 0 && (!worst || v < worst.v)) worst = {id:id, v:v}; });
+    var reason = [];
+    if(best) reason.push('「' + BYID[best.id].name + '」有助於' + d.label + '：' + BYID[best.id].pro + '。');
+    if(worst) reason.push('「' + BYID[worst.id].name + '」需留意：' + BYID[worst.id].risk + '。');
+    if(!reason.length) reason.push('目前選用的模式對' + d.label + '影響中性，表現取決於執行品質。');
+    if(d.id === 'p' && fin) reason.push('財務估算 LTV/CAC 約 ' + fin.ratio.toFixed(1) + ' 倍。');
+    var sug = score >= 4 ? '維持優勢，並把這個構面的指標放進每月追蹤。'
+      : (worst ? '可考慮以其他模式補強或降低「' + BYID[worst.id].name + '」帶來的風險。' : '加入能提升' + d.label + '的模式，例如到「模式適配排名」勾選其他候選。');
+    out[d.id] = {score:score, reason:reason.join(''), suggestion:sug, source:'rule'};
+  });
+  return out;
+}
+function ruleSwot(ctx, sel, fin){
+  var I = B.INDUSTRIES[ctx.ind];
+  var S = sel.slice(0,4).map(function(id){ return BYID[id].name + '：' + BYID[id].pro; });
+  if(ctx.resources) S.unshift('既有資源：' + ctx.resources);
+  var W = sel.slice(0,3).map(function(id){ return BYID[id].name + '：' + BYID[id].risk; });
+  if(fin && fin.ratio < 3) W.push('LTV/CAC 僅約 ' + fin.ratio.toFixed(1) + ' 倍，獲客效率偏低');
+  var O = I.opp.slice();
+  sel.filter(function(id){ return BYID[id].cat === 'context'; }).forEach(function(id){ O.push('善用「' + BYID[id].name + '」趨勢：' + BYID[id].desc); });
+  var T = I.thr.slice();
+  return {s:S.slice(0,5), w:W.slice(0,5), o:O.slice(0,5), t:T.slice(0,5), source:'rule'};
+}
+var FORCE_ADJ = [
+  ['O34','buyer',-1,'顧客鎖定提高轉換成本，降低買方議價力'], ['R42','buyer',-1,'忠誠計畫讓顧客較不容易比價跳槽'], ['X03','buyer',-1,'會員制預收會費、降低流失'],
+  ['C52','entrant',-1,'網路效果讓新進者難以追上'], ['C53','entrant',-1,'事實標準形成進入門檻'], ['C48','entrant',-1,'規模經濟讓新進者成本不具優勢'],
+  ['S17','rival',-1,'超級利基避開主流競爭'], ['C59','rival',-1,'藍海策略重新定義競爭場域'], ['S01','supplier',-1,'垂直整合降低對供應商的依賴'],
+  ['S03','supplier',1,'協調者模式高度依賴外部夥伴'], ['O25','buyer',1,'代工客戶集中，議價力強'], ['R45','sub',1,'免費服務容易被其他免費方案替代']
+];
+var FORCE_NOTE = {
+  rival:['同業少、差異明顯','有一定競爭，需持續差異化','同業眾多，價格戰風險高'],
+  entrant:['進入門檻高','門檻中等，需建立護城河','門檻低，新競爭者容易出現'],
+  sub:['不容易被其他方案取代','存在部分替代方案','替代方案多，顧客轉換容易'],
+  buyer:['顧客依賴度高','顧客有一定比價能力','顧客比價容易、議價力強'],
+  supplier:['供應來源多元','關鍵供應商有一定影響力','關鍵資源掌握在少數供應商手上']
+};
+function ruleForces(ctx, sel){
+  var base = B.INDUSTRIES[ctx.ind].forces, out = {};
+  FORCES.forEach(function(f){
+    var lv = base[f.k], notes = [];
+    FORCE_ADJ.forEach(function(a){ if(a[1] === f.k && sel.indexOf(a[0]) >= 0){ lv += a[2]; notes.push(a[3]); } });
+    lv = clamp(lv, 1, 3);
+    out[f.k] = {level:lv, note:FORCE_NOTE[f.k][lv-1] + (notes.length ? '；' + notes.join('；') : ''), source:'rule'};
+  });
+  return out;
+}
+function calcFin(inp, ind){
+  var d = B.INDUSTRIES[ind].fin, est = [];
+  function num(id, key){ var v = parseFloat(inp[id]); if(isFinite(v) && v >= 0) return v; est.push(key); return d[key]; }
+  var f = {price:num('nPrice','price'), cost:num('nCost','cost'), cac:num('nCac','cac'), freq:num('nFreq','freq'), years:num('nYears','years'), fixed:num('nFixed','fixed')};
+  f.estimated = est;
+  f.unit = f.price - f.cost;
+  f.margin = f.price > 0 ? f.unit / f.price : 0;
+  f.annual = f.unit * f.freq;
+  f.ltv = f.annual * f.years;
+  f.ratio = f.cac > 0 ? f.ltv / f.cac : 99;
+  f.payback = f.annual > 0 ? f.cac / (f.annual / 12) : Infinity;
+  f.beUnits = f.unit > 0 ? Math.ceil(f.fixed / f.unit) : Infinity;
+  f.beCustomers = f.annual > 0 ? Math.ceil(f.fixed / (f.annual / 12)) : Infinity;
+  return f;
+}
+function ruleExperiments(ctx, sel){
+  var order = ['strategy','revenue','operation','context'], picked = [];
+  order.forEach(function(c){ sel.forEach(function(id){ if(BYID[id].cat === c && picked.length < 3 && picked.indexOf(id) < 0) picked.push(id); }); });
+  return picked.map(function(id){
+    var p = BYID[id];
+    return {pattern:p.name, hyp:fill(p.hyp, ctx), exp:fill(p.exp, ctx), kpi:p.kpi.join('、'), success:'事先設定「' + p.kpi[0] + '」的及格門檻，未達標就調整或換掉這個模式', source:'rule'};
+  });
+}
+
+/* ================= 狀態與產生 ================= */
+var state = null;
+function buildContext(inp){
+  var ind = industryOf(inp);
+  return {product:inp.fProduct, target:inp.fTarget, pain:inp.fPain, resources:inp.fResources, ind:ind, biz:inp.fBiz, form:inp.fForm, price:inp.fPrice};
+}
+function computeRule(inp, sel){
+  var ctx = buildContext(inp);
+  var attrs = attrsOf(inp, ctx.ind);
+  var ranking = rankPatterns(inp, ctx.ind, attrs);
+  if(!sel) sel = autoSelect(ranking);
+  var syn = synergyList(sel);
+  var synTotal = syn.reduce(function(a,s){ return a + s.v; }, 0);
+  var fin = calcFin(inp, ctx.ind);
+  return {
+    input:inp, ctx:ctx, ranking:ranking, selected:sel, syn:syn,
+    summary:ruleSummary(ctx, sel), summarySource:'rule',
+    bmc:ruleBmc(ctx, sel), bmcSource:'rule',
+    dims:ruleDims(ctx, sel, attrs, synTotal, fin),
+    swot:ruleSwot(ctx, sel, fin), forces:ruleForces(ctx, sel), fin:fin,
+    experiments:ruleExperiments(ctx, sel), expSource:'rule',
+    ai:null, time:new Date().toISOString()
+  };
+}
+function ruleSummary(ctx, sel){
+  var by = {}; sel.forEach(function(id){ var p = BYID[id]; (by[p.cat] = by[p.cat] || []).push(p.name); });
+  var parts = [];
+  if(by.strategy) parts.push('以「' + by.strategy.join('＋') + '」作為核心策略');
+  if(by.operation) parts.push('透過「' + by.operation.join('＋') + '」營運');
+  if(by.revenue) parts.push('用「' + by.revenue.join('＋') + '」獲利');
+  if(by.context) parts.push('並借助「' + by.context.join('＋') + '」的情境優勢');
+  return '「' + ctx.product + '」' + parts.join('，') + '。';
+}
+function validInput(){
+  if(!$('fProduct').value.trim()){ toast('請先輸入產品或服務名稱'); $('fProduct').focus(); return false; }
+  return true;
+}
+function generateRule(){
+  if(!validInput()) return;
+  state = computeRule(readInput());
+  $('staleNote').style.display = 'none';
+  renderResult();
+  if(settings.autoSave) saveHistory(true);
+  $('result').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ================= AI ================= */
+function aiCandidateList(){
+  return PATTERNS.filter(function(p){ return settings.includeExt || p.book; })
+    .map(function(p){ return p.id + '｜' + B.CAT_LABEL[p.cat] + '｜' + p.name + '：' + p.desc; }).join('\n');
+}
+function inputBrief(ctx, inp){
+  var I = B.INDUSTRIES[ctx.ind];
+  var lines = ['產品／服務：' + ctx.product, '產業：' + I.label,
+    '客戶類型：' + ({b2c:'B2C 消費者', b2b:'B2B 企業', both:'B2B＋B2C'}[ctx.biz] || ''),
+    '產品型態：' + ({physical:'實體商品', digital:'數位／軟體', service:'服務', mixed:'混合'}[ctx.form] || ''),
+    '價格帶：' + ({low:'平價', mid:'中價位', high:'高價位'}[ctx.price] || '')];
+  if(ctx.target) lines.push('目標客群：' + ctx.target);
+  if(ctx.pain) lines.push('核心痛點：' + ctx.pain);
+  if(ctx.resources) lines.push('既有資源：' + ctx.resources);
+  return lines.join('\n');
+}
+var SECTION_SPEC = {
+  selected:'"selected":["模式代碼",...]（從候選清單挑選，策略/營運/獲利/情境各約 ' + '{COUNTS}' + ' 個，只能用清單中的代碼）',
+  summary:'"summary":"兩三句話說明這個商業模式如何運作與賺錢"',
+  bmc:'"bmc":{"kp":["..."],"ka":["..."],"kr":["..."],"vp":["..."],"cr":["..."],"ch":["..."],"cs":["..."],"cost":["..."],"rev":["..."]}（每格 2-4 條，具體貼合此產品）',
+  dims:'"dims":{"m":{"score":1-5,"reason":"...","suggestion":"..."},"v":{...},"f":{...},"p":{...},"d":{...},"x":{...}}（m市場吸引力 v顧客價值 f可行性 p獲利性 d競爭防禦力 x擴張性，score 為 1-5 整數）',
+  swot:'"swot":{"s":["..."],"w":["..."],"o":["..."],"t":["..."]}（各 3-5 條）',
+  forces:'"forces":{"rival":{"level":1-3,"note":"..."},"entrant":{...},"sub":{...},"buyer":{...},"supplier":{...}}（level 1弱 2中 3強）',
+  experiments:'"experiments":[{"pattern":"對應模式名稱","hyp":"關鍵假設","exp":"兩週內可執行的 MVP 驗證實驗","kpi":"觀察指標","success":"成功門檻"}]（3 個）'
+};
+function buildPrompt(sections, ctx, inp, selected){
+  var counts = CATS.map(function(c){ return B.CAT_LABEL[c] + settings.counts[c]; }).join('、');
+  var L = [];
+  L.push('你是熟悉台灣市場的商業模式顧問。請依下列產品資訊設計並評價它的商業模式，全部使用繁體中文（台灣用語）。');
+  L.push(''); L.push(inputBrief(ctx, inp)); L.push('');
+  if(sections.indexOf('selected') >= 0){
+    L.push('候選商業模式（代碼｜類別｜名稱：說明）：'); L.push(aiCandidateList());
+  } else {
+    L.push('已決定採用的模式組合：' + selected.map(function(id){ return BYID[id].name + '（' + B.CAT_LABEL[BYID[id].cat] + '）'; }).join('、'));
+  }
+  L.push('');
+  L.push('請只輸出一個 JSON 物件，不要 markdown 圍欄、不要任何其他文字，包含以下欄位：');
+  sections.forEach(function(s){ L.push('- ' + SECTION_SPEC[s].replace('{COUNTS}', counts)); });
+  L.push('不要使用 Markdown 符號（例如 **、#）；條列內容要具體、可執行，並與所選模式一致。');
+  return L.join('\n');
+}
+function strArr(a, max){ return Array.isArray(a) ? a.filter(function(s){ return typeof s === 'string' && s.trim(); }).map(function(s){ return s.trim().slice(0, 240); }).slice(0, max) : []; }
+function applyAi(st, parsed){
+  var used = [], fellBack = [];
+  if(typeof parsed.summary === 'string' && parsed.summary.trim()){ st.summary = parsed.summary.trim().slice(0, 500); st.summarySource = 'ai'; used.push('摘要'); }
+  if(parsed.bmc && typeof parsed.bmc === 'object'){
+    var okBoxes = 0, nb = {};
+    BOXES.forEach(function(b){ var arr = strArr(parsed.bmc[b.k], 6); if(arr.length){ nb[b.k] = arr; okBoxes++; } else nb[b.k] = st.bmc[b.k]; });
+    if(okBoxes){ st.bmc = nb; st.bmcSource = okBoxes === BOXES.length ? 'ai' : 'mixed'; used.push('商業模式圖'); }
+    if(okBoxes < BOXES.length) fellBack.push('商業模式圖部分格子');
+  }
+  if(parsed.dims && typeof parsed.dims === 'object'){
+    DIMS.forEach(function(d){
+      var src = parsed.dims[d.id], sc = src ? Math.round(Number(src.score)) : NaN;
+      if(src && sc >= 1 && sc <= 5 && typeof src.reason === 'string' && src.reason.trim()){
+        st.dims[d.id] = {score:sc, reason:src.reason.trim().slice(0, 400), suggestion:typeof src.suggestion === 'string' ? src.suggestion.trim().slice(0, 300) : '', source:'ai'};
+      } else fellBack.push(d.label);
+    });
+    used.push('六構面');
+  }
+  if(parsed.swot && typeof parsed.swot === 'object'){
+    var sw = {s:strArr(parsed.swot.s,5), w:strArr(parsed.swot.w,5), o:strArr(parsed.swot.o,5), t:strArr(parsed.swot.t,5)};
+    if(sw.s.length && sw.w.length && sw.o.length && sw.t.length){ sw.source = 'ai'; st.swot = sw; used.push('SWOT'); } else fellBack.push('SWOT');
+  }
+  if(parsed.forces && typeof parsed.forces === 'object'){
+    FORCES.forEach(function(f){
+      var src = parsed.forces[f.k], lv = src ? Math.round(Number(src.level)) : NaN;
+      if(src && lv >= 1 && lv <= 3 && typeof src.note === 'string' && src.note.trim()) st.forces[f.k] = {level:lv, note:src.note.trim().slice(0,300), source:'ai'};
+      else fellBack.push(f.label);
+    });
+    used.push('五力');
+  }
+  if(Array.isArray(parsed.experiments)){
+    var ex = parsed.experiments.filter(function(e){ return e && typeof e.hyp === 'string' && typeof e.exp === 'string' && e.hyp.trim() && e.exp.trim(); }).slice(0,3)
+      .map(function(e){ return {pattern:String(e.pattern || '').slice(0,40), hyp:e.hyp.trim().slice(0,300), exp:e.exp.trim().slice(0,400), kpi:String(e.kpi || '').slice(0,200), success:String(e.success || '').slice(0,200), source:'ai'}; });
+    if(ex.length){ st.experiments = ex; st.expSource = 'ai'; used.push('驗證實驗'); } else fellBack.push('驗證實驗');
+  }
+  return {used:used, fellBack:fellBack};
+}
+function aiReady(){
+  if(!settings.apiKey){ toast('請先在「⚙ 常用設定」填入 API 金鑰'); openSettings(true); $('aiKey').focus(); return false; }
+  if(!settings.model){ settings.model = AI_PROVIDERS[settings.provider].defaultModel; }
+  return true;
+}
+function setAiStatus(msg, err){ var el = $('aiStatus'); el.innerHTML = msg; el.className = err ? 'err' : ''; }
+var aiBusy = false;
+async function generateAi(){
+  if(aiBusy || !validInput() || !aiReady()) return;
+  aiBusy = true; $('genAiBtn').disabled = true;
+  var inp = readInput();
+  var base = computeRule(inp);
+  setAiStatus('<span class="spin" style="border-color:var(--navy);border-right-color:transparent"></span>AI 正在挑選模式並撰寫評價，約需 30–90 秒…');
+  try{
+    var prompt = buildPrompt(['selected','summary','bmc','dims','swot','forces','experiments'], base.ctx, inp, base.selected);
+    var text = await callLLM(settings.provider, settings.model, settings.apiKey, prompt, function(n, code, w){ setAiStatus('服務商忙碌（' + code + '），' + w + ' 秒後第 ' + (n+1) + ' 次重試…'); });
+    var parsed = extractJsonObject(text);
+    var sel = Array.isArray(parsed.selected) ? parsed.selected.filter(function(id, i, arr){ return BYID[id] && (settings.includeExt || BYID[id].book) && arr.indexOf(id) === i; }) : [];
+    var st = sel.length >= 3 ? computeRule(inp, sel) : base;
+    var r = applyAi(st, parsed);
+    st.ai = {provider:settings.provider, model:settings.model, selectedByAi:sel.length >= 3};
+    state = st;
+    $('staleNote').style.display = 'none';
+    renderResult();
+    if(settings.autoSave) saveHistory(true);
+    var msg = '✅ AI 完成（' + esc(AI_PROVIDERS[settings.provider].label) + '／' + esc(settings.model) + '）';
+    if(sel.length < 3) msg += '；AI 回傳的模式代碼不足，組合改用規則式';
+    if(r.fellBack.length) msg += '；以下項目改用規則式：' + esc(r.fellBack.join('、'));
+    setAiStatus(msg);
+    $('result').scrollIntoView({behavior:'smooth', block:'start'});
+  }catch(e){
+    setAiStatus('❌ ' + esc(e.message || e) + '。已改顯示規則式結果。', true);
+    state = base; renderResult();
+  }finally{ aiBusy = false; $('genAiBtn').disabled = false; }
+}
+async function regenSection(sec){
+  if(!state || aiBusy || !aiReady()) return;
+  var map = {bmc:['bmc'], dims:['dims'], swot:['swot'], forces:['forces'], exp:['experiments']};
+  aiBusy = true; toast('AI 重新產生中…');
+  try{
+    var text = await callLLM(settings.provider, settings.model, settings.apiKey, buildPrompt(map[sec], state.ctx, state.input, state.selected));
+    var r = applyAi(state, extractJsonObject(text));
+    renderResult(sec);
+    toast(r.fellBack.length ? '完成，部分項目改用規則式：' + r.fellBack.join('、') : '已重新產生');
+  }catch(e){ toast('AI 失敗：' + (e.message || e)); }
+  finally{ aiBusy = false; }
+}
+
+/* ================= 呈現 ================= */
+function overallOf(dims){ var t = 0; DIMS.forEach(function(d){ t += (dims[d.id].score - 1) / 4 * 100 * d.w; }); return Math.round(t); }
+function gradeOf(s){ return s >= 80 ? 'a' : s >= 65 ? 'b' : s >= 50 ? 'c' : 'd'; }
+var GRADE_LABEL = {a:'優異', b:'良好', c:'普通', d:'待加強'};
+function badge(src){ return src === 'ai' ? '<span class="src-badge ai">AI</span>' : src === 'mixed' ? '<span class="src-badge ai">AI＋規則式</span>' : '<span class="src-badge rule">規則式</span>'; }
+function stars(n){ return '★★★★★'.slice(0,n) + '☆☆☆☆☆'.slice(0,5-n); }
+function pill(id){ var p = BYID[id]; return '<span class="pill ' + p.cat + '">' + (p.no ? '<i>#' + p.no + '</i>' : '<i>延伸</i>') + esc(p.name) + '</span>'; }
+function fmt(n){ return isFinite(n) ? Math.round(n).toLocaleString('zh-TW') : '—'; }
+
+function radarSvg(dims){
+  var cx = 160, cy = 150, R = 110, n = DIMS.length, g = '';
+  function pt(i, r){ var a = -Math.PI/2 + i * 2*Math.PI/n; return [cx + r*Math.cos(a), cy + r*Math.sin(a)]; }
+  for(var lv=1; lv<=5; lv++){
+    var ring = DIMS.map(function(d,i){ return pt(i, R*lv/5).map(function(v){ return v.toFixed(1); }).join(','); }).join(' ');
+    g += '<polygon points="' + ring + '" fill="none" stroke="#ddd5c4" stroke-width="1"/>';
+  }
+  DIMS.forEach(function(d,i){
+    var e = pt(i, R), l = pt(i, R + 22);
+    g += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="#ddd5c4"/>';
+    g += '<text x="' + l[0].toFixed(1) + '" y="' + (l[1]+4).toFixed(1) + '" text-anchor="middle" font-size="12" fill="#1d3557">' + d.label + ' ' + dims[d.id].score + '</text>';
+  });
+  var poly = DIMS.map(function(d,i){ return pt(i, R*dims[d.id].score/5).map(function(v){ return v.toFixed(1); }).join(','); }).join(' ');
+  g += '<polygon points="' + poly + '" fill="rgba(217,154,41,.28)" stroke="#d99a29" stroke-width="2.5"/>';
+  DIMS.forEach(function(d,i){ var p = pt(i, R*dims[d.id].score/5); g += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="#1d3557"/>'; });
+  return '<svg viewBox="-30 0 380 300" role="img" aria-label="六構面雷達圖">' + g + '</svg>';
+}
+function htmlBmc(s){
+  return '<div class="bmc">' + BOXES.map(function(b){
+    return '<div class="cell c-' + b.k + '"><h4>' + b.label + '</h4><ul>' + (s.bmc[b.k] || []).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
+  }).join('') + '</div>';
+}
+function htmlDims(s){
+  return '<div class="dims"><div class="radar">' + radarSvg(s.dims) + '</div><div class="dim-list">' + DIMS.map(function(d){
+    var x = s.dims[d.id];
+    return '<div class="dim"><div class="dim-head"><span>' + d.label + badge(x.source) + '</span><span class="stars">' + stars(x.score) + '</span></div>'
+      + '<p>' + esc(x.reason) + '</p>' + (x.suggestion ? '<p class="sug">💡 ' + esc(x.suggestion) + '</p>' : '') + '</div>';
+  }).join('') + '</div></div>';
+}
+function htmlSyn(s){
+  var items = s.syn.map(function(x){
+    return '<div class="syn-item ' + (x.v > 0 ? 'pos' : 'neg') + '"><b>' + (x.v > 0 ? '✅ 綜效' : '⚠️ 衝突') + '（' + (x.v > 0 ? '+' : '') + x.v + '）</b>　'
+      + esc(BYID[x.a].name) + ' × ' + esc(BYID[x.b].name) + '：' + esc(x.txt) + '</div>';
+  });
+  var cats = {}; s.selected.forEach(function(id){ cats[BYID[id].cat] = 1; });
+  CATS.forEach(function(c){ if(!cats[c]) items.push('<div class="syn-item info"><b>ℹ️ 缺口</b>　目前沒有選用任何「' + B.CAT_LABEL[c] + '」，' + (c === 'revenue' ? '建議至少選一個獲利模式，說清楚錢從哪裡來。' : '可到「模式適配排名」補選。') + '</div>'); });
+  if(!items.length) items.push('<div class="syn-item info">所選模式之間沒有已知的明顯綜效或衝突，整體搭配中性。</div>');
+  var total = s.syn.reduce(function(a,x){ return a + x.v; }, 0);
+  return '<p class="muted">綜效分數合計：<b>' + (total > 0 ? '+' : '') + total + '</b>（正分代表模式之間互相加乘，負分代表方向衝突，會影響「獲利性」與「競爭防禦力」評分）</p><div class="syn">' + items.join('') + '</div>';
+}
+function htmlSwot(s){
+  function ul(a){ return '<ul>' + a.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>'; }
+  return '<p class="muted">來源' + badge(s.swot.source) + '</p><div class="swot"><div class="sw-s"><h4>S 優勢</h4>' + ul(s.swot.s) + '</div><div class="sw-w"><h4>W 劣勢</h4>' + ul(s.swot.w)
+    + '</div><div class="sw-o"><h4>O 機會</h4>' + ul(s.swot.o) + '</div><div class="sw-t"><h4>T 威脅</h4>' + ul(s.swot.t) + '</div></div>';
+}
+function htmlForces(s){
+  var avg = FORCES.reduce(function(a,f){ return a + s.forces[f.k].level; }, 0) / FORCES.length;
+  return '<p class="muted">平均壓力 ' + avg.toFixed(1) + ' / 3（越低代表產業環境對你越有利）</p><div class="forces">' + FORCES.map(function(f){
+    var x = s.forces[f.k], col = ['','var(--green)','var(--gold)','var(--red)'][x.level];
+    return '<div class="force"><h4><span>' + f.label + badge(x.source) + '</span><span class="lv lv' + x.level + '">' + LV_TXT[x.level] + '</span></h4>'
+      + '<div class="bar"><i style="width:' + (x.level/3*100) + '%;background:' + col + '"></i></div>' + esc(x.note) + '</div>';
+  }).join('') + '</div>';
+}
+function htmlFin(s){
+  var f = s.fin;
+  function cls(ok, warn){ return ok ? 'ok' : warn ? 'warn' : 'bad'; }
+  var revNames = s.selected.filter(function(id){ return BYID[id].cat === 'revenue'; }).map(function(id){ return BYID[id].name; });
+  var est = f.estimated.length ? '<p class="muted">⚠️ 以下數字中「' + f.estimated.map(function(k){ return {price:'單價',cost:'成本',cac:'獲客成本',freq:'年購買次數',years:'留存年數',fixed:'固定成本'}[k]; }).join('、') + '」使用「' + B.INDUSTRIES[s.ctx.ind].label + '」產業預設值估算，請在「財務數字」填入實際數字讓結果更準確。</p>' : '';
+  return est + '<div class="fin-grid">'
+    + '<div class="kpi"><span>毛利率</span><b class="' + cls(f.margin >= .5, f.margin >= .3) + '">' + (f.margin*100).toFixed(0) + '%</b><em>單價 ' + fmt(f.price) + '／成本 ' + fmt(f.cost) + '</em></div>'
+    + '<div class="kpi"><span>顧客終身價值 LTV（毛利）</span><b>' + fmt(f.ltv) + '</b><em>每年 ' + f.freq + ' 次 × ' + f.years + ' 年</em></div>'
+    + '<div class="kpi"><span>LTV ÷ CAC</span><b class="' + cls(f.ratio >= 3, f.ratio >= 1) + '">' + (f.ratio >= 99 ? '—' : f.ratio.toFixed(1) + ' 倍') + '</b><em>健康標準 ≥ 3 倍</em></div>'
+    + '<div class="kpi"><span>獲客成本回收期</span><b class="' + cls(f.payback <= 12, f.payback <= 24) + '">' + (isFinite(f.payback) ? f.payback.toFixed(1) + ' 個月' : '無法回收') + '</b><em>CAC ' + fmt(f.cac) + ' 元</em></div>'
+    + '<div class="kpi"><span>每月損益兩平銷量</span><b>' + fmt(f.beUnits) + '</b><em>每月固定成本 ' + fmt(f.fixed) + ' 元</em></div>'
+    + '<div class="kpi"><span>損益兩平所需活躍顧客</span><b>' + fmt(f.beCustomers) + ' 人</b><em>依每位顧客每月毛利估算</em></div>'
+    + '</div><p class="muted" style="margin-top:10px">對應獲利模式：' + esc(revNames.join('、') || '尚未選擇') + '。'
+    + (f.ratio < 3 ? '目前 LTV/CAC 偏低，可考慮加入「訂閱制」「顧客忠誠計畫」等提高回購，或用「聯盟行銷」「社群驅動」降低獲客成本。' : '獲客效率健康，可評估加大行銷投入擴張。') + '</p>';
+}
+function htmlExp(s){
+  return '<p class="muted">依精實創業的做法，先驗證這個組合中風險最高的假設。來源' + badge(s.expSource) + '</p>' + s.experiments.map(function(e, i){
+    return '<div class="exp"><h4>實驗 ' + (i+1) + (e.pattern ? '｜' + esc(e.pattern) : '') + '</h4><dl><dt>關鍵假設</dt><dd>' + esc(e.hyp) + '</dd><dt>MVP 實驗</dt><dd>' + esc(e.exp)
+      + '</dd><dt>觀察指標</dt><dd>' + esc(e.kpi) + '</dd><dt>成功門檻</dt><dd>' + esc(e.success) + '</dd></dl></div>';
+  }).join('');
+}
+function htmlCases(s){
+  var cnt = {};
+  s.selected.forEach(function(id){ BYID[id].examples.forEach(function(c){ (cnt[c] = cnt[c] || []).push(BYID[id].name); }); });
+  var multi = Object.keys(cnt).filter(function(c){ return cnt[c].length >= 2; });
+  var top = multi.length ? '<div class="top-cases"><b>🎯 最相近個案</b>（同時採用多個你選的模式）：' + multi.map(function(c){ return esc(c) + '（' + esc(cnt[c].join('＋')) + '）'; }).join('、') + '</div>' : '';
+  return top + '<div class="cases">' + s.selected.map(function(id){
+    var p = BYID[id];
+    return '<div class="case"><h4>' + pill(id) + '</h4><div>' + esc(p.examples.join('、')) + '</div><div class="pdesc">' + esc(p.desc) + '</div></div>';
+  }).join('') + '</div>';
+}
+var rankFilter = 'all';
+function htmlRank(s){
+  var tools = '<div class="rank-tools"><div class="seg" id="rankSeg">' + [['all','全部']].concat(CATS.map(function(c){ return [c, B.CAT_LABEL[c]]; })).map(function(x){
+    return '<button type="button" data-f="' + x[0] + '" class="' + (rankFilter === x[0] ? 'on' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>'
+    + '<span class="muted">勾選／取消即可調整組合，評價會即時以規則式重新計算</span></div>';
+  var rows = s.ranking.filter(function(r){ return rankFilter === 'all' || BYID[r.id].cat === rankFilter; }).map(function(r, i){
+    var p = BYID[r.id], on = s.selected.indexOf(p.id) >= 0;
+    return '<tr class="' + (on ? 'sel' : '') + '"><td><input type="checkbox" data-pick="' + p.id + '"' + (on ? ' checked' : '') + ' aria-label="選用 ' + esc(p.name) + '"></td>'
+      + '<td>' + (p.no ? '#' + p.no : '<span class="ext-tag">延伸</span>') + '</td>'
+      + '<td><details><summary>' + esc(p.name) + '</summary><div>' + esc(p.desc) + '<br>👉 ' + esc(fill(p.how, s.ctx)) + '<br>✅ ' + esc(p.pro) + '<br>⚠️ ' + esc(p.risk) + '<br>🏢 ' + esc(p.examples.join('、')) + '</div></details>'
+      + '<span class="pdesc">' + esc(p.en) + '</span></td>'
+      + '<td class="hide-m">' + B.CAT_LABEL[p.cat] + '</td>'
+      + '<td><span class="fitbar"><i style="width:' + r.fit + '%"></i></span> ' + r.fit + '</td></tr>';
+  }).join('');
+  return tools + '<table class="rank-table"><thead><tr><th>選用</th><th>編號</th><th>模式</th><th class="hide-m">類別</th><th>適配度</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+var PANES = {
+  bmc:{title:'商業模式圖', html:htmlBmc, regen:true}, dims:{title:'六構面雷達', html:htmlDims, regen:true},
+  syn:{title:'綜效與衝突', html:htmlSyn}, swot:{title:'SWOT', html:htmlSwot, regen:true},
+  forces:{title:'五力分析', html:htmlForces, regen:true}, fin:{title:'財務健檢', html:htmlFin},
+  exp:{title:'驗證實驗', html:htmlExp, regen:true}, cases:{title:'個案對照', html:htmlCases}, rank:{title:'模式適配排名', html:htmlRank}
+};
+var activeTab = 'bmc';
+function enabledEvals(){ return EVALS.filter(function(e){ return settings.evals[e.id]; }).map(function(e){ return e.id; }); }
+function renderResult(onlyPane){
+  if(!state) return;
+  var s = state;
+  $('result').style.display = 'block';
+  var score = overallOf(s.dims), g = gradeOf(score);
+  $('gradeBadge').className = 'grade g-' + g;
+  $('gradeLetter').textContent = g.toUpperCase();
+  $('gradeScore').textContent = score + ' 分・' + GRADE_LABEL[g];
+  $('resTitle').innerHTML = esc(s.ctx.product) + ' <small>' + esc(B.INDUSTRIES[s.ctx.ind].label) + '</small>';
+  $('comboPills').innerHTML = s.selected.map(pill).join('');
+  $('resSummary').innerHTML = esc(s.summary) + badge(s.summarySource);
+  var ids = enabledEvals();
+  if(ids.indexOf(activeTab) < 0) activeTab = ids[0];
+  $('tabs').innerHTML = ids.map(function(id){ return '<button type="button" class="tab' + (id === activeTab ? ' on' : '') + '" data-tab="' + id + '">' + PANES[id].title + '</button>'; }).join('');
+  var srcFor = {bmc:s.bmcSource};
+  $('panes').innerHTML = ids.map(function(id){
+    var tools = PANES[id].regen ? '<div class="pane-tools"><button class="btn ghost small" type="button" data-regen="' + id + '">✨ AI 重新產生此區塊</button></div>' : '';
+    var head = id === 'bmc' ? '<p class="muted">來源' + badge(srcFor.bmc) + '</p>' : '';
+    return '<div class="tabpane' + (id === activeTab ? ' on' : '') + '" data-pane="' + id + '">' + tools + head + PANES[id].html(s) + '</div>';
+  }).join('');
+}
+function changeSelection(id, on){
+  var sel = state.selected.slice();
+  if(on && sel.indexOf(id) < 0) sel.push(id);
+  if(!on) sel = sel.filter(function(x){ return x !== id; });
+  if(!sel.length){ toast('至少要保留一個模式'); renderResult(); return; }
+  sel.sort(function(a,b){ return CATS.indexOf(BYID[a].cat) - CATS.indexOf(BYID[b].cat); });
+  var hadAi = !!state.ai;
+  state = computeRule(state.input, sel);
+  activeTab = 'rank';
+  renderResult();
+  $('staleNote').style.display = hadAi ? 'block' : 'none';
+}
+
+/* ================= PDF ================= */
+function buildPrintReport(){
+  if(!state) return;
+  var s = state, score = overallOf(s.dims), g = gradeOf(score), d = new Date(s.time);
+  var html = '<div class="pr-cover"><h1>' + esc(s.ctx.product) + '｜商業模式分析報告</h1>'
+    + '<p>產業：' + esc(B.INDUSTRIES[s.ctx.ind].label) + (s.ctx.target ? '　目標客群：' + esc(s.ctx.target) : '') + '</p>'
+    + (s.ctx.pain ? '<p>核心痛點：' + esc(s.ctx.pain) + '</p>' : '')
+    + '<p>產出日期：' + d.toLocaleDateString('zh-TW') + (settings.author ? '　報告人：' + esc(settings.author) : '') + (s.ai ? '　AI：' + esc(s.ai.model) : '　產生方式：規則式') + '</p></div>';
+  html += '<div class="pr-sec"><h2>綜合評價：' + g.toUpperCase() + '（' + score + ' 分・' + GRADE_LABEL[g] + '）</h2><div class="combo">' + s.selected.map(pill).join('') + '</div><p>' + esc(s.summary) + '</p></div>';
+  enabledEvals().forEach(function(id){
+    if(id === 'rank'){
+      html += '<div class="pr-sec"><h2>模式適配排名（前 15 名）</h2><table><tr><th>名次</th><th>模式</th><th>類別</th><th>適配度</th><th>選用</th></tr>'
+        + s.ranking.slice(0,15).map(function(r,i){ var p = BYID[r.id]; return '<tr><td>' + (i+1) + '</td><td>' + esc(p.name) + (p.no ? '（#' + p.no + '）' : '（延伸）') + '</td><td>' + B.CAT_LABEL[p.cat] + '</td><td>' + r.fit + '</td><td>' + (s.selected.indexOf(p.id) >= 0 ? '✔' : '') + '</td></tr>'; }).join('') + '</table></div>';
+    } else {
+      html += '<div class="pr-sec"><h2>' + PANES[id].title + '</h2>' + PANES[id].html(s) + '</div>';
+    }
+  });
+  if(settings.appendix){
+    html += '<div class="pr-sec"><h2>附錄：所選模式說明</h2><table><tr><th>模式</th><th>定義</th><th>應用到本產品</th><th>主要風險</th></tr>'
+      + s.selected.map(function(id){ var p = BYID[id]; return '<tr><td>' + esc(p.name) + '<br><small>' + B.CAT_LABEL[p.cat] + '</small></td><td>' + esc(p.desc) + '</td><td>' + esc(fill(p.how, s.ctx)) + '</td><td>' + esc(p.risk) + '</td></tr>'; }).join('') + '</table></div>';
+  }
+  html += '<div style="font-size:10px;color:#777;margin-top:16px;border-top:1px solid #ddd;padding-top:8px">'
+    + '<p style="margin:2px 0"><b>使用警語：</b>本報告由「商業模式組合工作室」以規則或 AI 推估產生，僅供發想、教學與討論參考，不構成任何投資、創業、融資或經營決策建議；財務數字未填時以產業常用值估算，請自行查證。個案企業名稱僅為說明模式之用，與本工具無合作或背書關係。</p>'
+    + '<p style="margin:2px 0">工具製作：Mark Tsai（蔡豐全）｜tsaimark@gmail.com</p></div>';
+  $('printReport').innerHTML = html;
+  document.body.classList.toggle('wm-on', !!settings.watermark);
+}
+window.addEventListener('beforeprint', buildPrintReport);
+
+/* ================= 歷史紀錄 ================= */
+function loadHistory(){ try{ return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); }catch(e){ return []; } }
+function storeHistory(h){ try{ localStorage.setItem(HIST_KEY, JSON.stringify(h.slice(0,30))); }catch(e){ toast('儲存空間不足，請刪除部分歷史紀錄'); } }
+function snapshot(){ return JSON.parse(JSON.stringify(state)); }
+function saveHistory(silent){
+  if(!state) return;
+  var h = loadHistory();
+  var name = state.ctx.product + '（' + (state.ai ? 'AI' : '規則式') + '）';
+  h = h.filter(function(x){ return x.time !== state.time; });
+  h.unshift({name:name, time:state.time, state:snapshot()});
+  storeHistory(h); renderHistory();
+  if(!silent) toast('已存入歷史紀錄');
+}
+function renderHistory(){
+  var h = loadHistory();
+  $('historyList').innerHTML = h.length ? h.map(function(x, i){
+    return '<div class="hist-item"><span><b>' + esc(x.name) + '</b> <span class="muted">' + new Date(x.time).toLocaleString('zh-TW') + '</span></span>'
+      + '<span class="btns"><button class="btn ghost small" type="button" data-hload="' + i + '">開啟</button><button class="btn ghost small" type="button" data-hdel="' + i + '">刪除</button></span></div>';
+  }).join('') : '<p class="muted">還沒有紀錄。</p>';
+}
+function loadState(st){
+  if(!st || !st.input || !Array.isArray(st.selected)) throw new Error('格式不符');
+  st.selected = st.selected.filter(function(id){ return BYID[id]; });
+  var fresh = computeRule(st.input, st.selected);
+  ['summary','summarySource','bmc','bmcSource','dims','swot','forces','experiments','expSource','ai','time'].forEach(function(k){ if(st[k] != null) fresh[k] = st[k]; });
+  state = fresh; writeInput(st.input); renderResult(); $('staleNote').style.display = 'none';
+}
+function download(name, text){
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], {type:'application/json'}));
+  a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+}
+
+/* ================= 跑馬燈 ================= */
+function initMarquee(){
+  var MARQUEE_CHECK_URL = "https://script.google.com/macros/s/AKfycbwKX0DNNbY8y4nf90BFTHtxgfqJcHHcZasRrgycl4QAe52_hkjMWSkYk4xOsqU-JPCROw/exec";
+  var STORAGE_KEY = PREFIX + 'marquee';
+  var REFRESH_MS = 20 * 60 * 1000;
+  var bar = $('marqueeBar'), track = $('marqueeTrack'), lastKey = null;
+  function loadCache(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }catch(e){ return []; } }
+  function saveCache(items){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); }catch(e){} }
+  function appendParsedText(container, text){
+    var re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, lastIndex = 0, m;
+    while((m = re.exec(text))){
+      if(m.index > lastIndex) container.appendChild(document.createTextNode(text.slice(lastIndex, m.index)));
+      var a = document.createElement('a');
+      a.href = m[2]; a.textContent = m[1]; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.style.color = 'inherit'; a.style.textDecoration = 'underline';
+      container.appendChild(a); lastIndex = re.lastIndex;
+    }
+    if(lastIndex < text.length) container.appendChild(document.createTextNode(text.slice(lastIndex)));
+  }
+  function render(items){
+    if(!settings.marquee || !items || !items.length) return;
+    var key = JSON.stringify(items);
+    if(key === lastKey) return;
+    lastKey = key; track.innerHTML = '';
+    var frag = document.createDocumentFragment();
+    function pass(){ items.forEach(function(item, idx){ if(idx > 0) frag.appendChild(document.createTextNode('　★　')); appendParsedText(frag, item); }); }
+    pass(); frag.appendChild(document.createTextNode('　★　')); pass();
+    track.appendChild(frag);
+    bar.classList.add('show'); document.body.classList.add('has-marquee');
+    track.style.animationDuration = Math.max(track.scrollWidth / 2 / 80, 10) + 's';
+  }
+  function fetchMarquee(){
+    if(!settings.marquee) return;
+    fetch(MARQUEE_CHECK_URL, {method:'POST', body:JSON.stringify({serial:''})})
+      .then(function(r){ return r.json(); })
+      .then(function(data){ if(data && Array.isArray(data.marquee) && data.marquee.length){ saveCache(data.marquee); render(data.marquee); } })
+      .catch(function(){});
+  }
+  window.__applyMarquee = function(){
+    if(!settings.marquee){ bar.classList.remove('show'); document.body.classList.remove('has-marquee'); lastKey = null; }
+    else { render(loadCache()); fetchMarquee(); }
+  };
+  render(loadCache()); fetchMarquee(); setInterval(fetchMarquee, REFRESH_MS);
+}
+
+/* ================= PWA ================= */
+function initPwa(){
+  var deferredPrompt = null, btn = $('installBtn');
+  var ua = navigator.userAgent || '';
+  var isIOSDevice = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isMacDesktop = /Macintosh/.test(ua) && !isIOSDevice;
+  var isSafariEngine = /^((?!chrome|crios|fxios|edgios|android).)*safari/i.test(ua);
+  var isStandalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  function fallbackMessage(){
+    if(isIOSDevice) return '請點畫面上的「分享」圖示，選「加入主畫面」';
+    if(isMacDesktop && isSafariEngine) return '請用選單列「檔案」→「加入 Dock」（Safari 17 以上）';
+    return '目前瀏覽器不支援安裝，或已安裝過';
+  }
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); deferredPrompt = e; });
+  window.addEventListener('appinstalled', function(){ deferredPrompt = null; });
+  if(isStandalone) btn.style.display = 'none';
+  else btn.addEventListener('click', function(){
+    if(!deferredPrompt){ toast(fallbackMessage()); return; }
+    try{ deferredPrompt.prompt(); deferredPrompt.userChoice.then(function(){ deferredPrompt = null; }); }catch(e){ toast(fallbackMessage()); }
+  });
+  if('serviceWorker' in navigator && location.protocol !== 'file:'){
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('service-worker.js').catch(function(){}); });
+  }
+}
+
+/* ================= 設定面板 ================= */
+function openSettings(force){
+  var sec = $('settings'), show = force === true ? true : sec.hidden;
+  sec.hidden = !show;
+  $('settingsBtn').setAttribute('aria-expanded', String(show));
+  if(show) sec.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function applySettings(){
+  document.body.classList.remove('fs-l','fs-xl');
+  if(settings.fs) document.body.classList.add('fs-' + settings.fs);
+  Array.prototype.forEach.call($('fsSeg').children, function(b){ b.classList.toggle('on', b.getAttribute('data-fs') === (settings.fs || '')); });
+  document.querySelectorAll('[data-count]').forEach(function(sel){ sel.value = String(settings.counts[sel.getAttribute('data-count')]); });
+  $('setExt').checked = !!settings.includeExt; $('setAutoSave').checked = !!settings.autoSave; $('setMarquee').checked = !!settings.marquee;
+  $('setAuthor').value = settings.author || ''; $('setWatermark').checked = !!settings.watermark; $('setAppendix').checked = !!settings.appendix;
+  document.querySelectorAll('[data-eval]').forEach(function(cb){ cb.checked = !!settings.evals[cb.getAttribute('data-eval')]; });
+  var providerSel = $('aiProvider');
+  providerSel.value = AI_PROVIDERS[settings.provider] ? settings.provider : 'claude';
+  renderModelOptions(providerSel.value, settings.model);
+  $('aiKey').value = settings.apiKey || '';
+  refreshAiBtn();
+  renderDefaultsSummary();
+}
+function initSettingsUi(){
+  $('aiProvider').innerHTML = Object.keys(AI_PROVIDERS).map(function(k){ return '<option value="' + k + '">' + AI_PROVIDERS[k].label + '</option>'; }).join('');
+  document.querySelectorAll('[data-count]').forEach(function(sel){
+    sel.innerHTML = [0,1,2,3].map(function(n){ return '<option value="' + n + '">' + n + '</option>'; }).join('');
+    sel.addEventListener('change', function(){ settings.counts[sel.getAttribute('data-count')] = Number(sel.value); saveSettings(); });
+  });
+  $('evalChecks').innerHTML = EVALS.map(function(e){ return '<label class="inline"><input type="checkbox" data-eval="' + e.id + '"> ' + e.label + '</label>'; }).join('');
+  $('evalChecks').addEventListener('change', function(ev){
+    var id = ev.target.getAttribute('data-eval'); if(!id) return;
+    settings.evals[id] = ev.target.checked;
+    if(!enabledEvals().length){ settings.evals[id] = true; ev.target.checked = true; toast('至少要保留一種評價'); }
+    saveSettings(); renderResult();
+  });
+  $('fsSeg').addEventListener('click', function(ev){ var b = ev.target.closest('button'); if(!b) return; settings.fs = b.getAttribute('data-fs'); saveSettings(); applySettings(); });
+  $('setExt').addEventListener('change', function(){ settings.includeExt = this.checked; saveSettings(); if(state) { state = computeRule(state.input, state.selected.filter(function(id){ return settings.includeExt || BYID[id].book; })); renderResult(); } });
+  $('setAutoSave').addEventListener('change', function(){ settings.autoSave = this.checked; saveSettings(); });
+  $('setMarquee').addEventListener('change', function(){ settings.marquee = this.checked; saveSettings(); if(window.__applyMarquee) window.__applyMarquee(); });
+  $('setAuthor').addEventListener('input', function(){ settings.author = this.value.trim(); saveSettings(); });
+  $('setWatermark').addEventListener('change', function(){ settings.watermark = this.checked; saveSettings(); });
+  $('setAppendix').addEventListener('change', function(){ settings.appendix = this.checked; saveSettings(); });
+  $('aiProvider').addEventListener('change', function(){ renderModelOptions(this.value, null); persistApiConfig(); });
+  $('aiModel').addEventListener('change', function(){ syncModelCustomVisibility(); persistApiConfig(); });
+  $('aiModelCustom').addEventListener('input', persistApiConfig);
+  $('aiKey').addEventListener('input', persistApiConfig);
+  $('testAiBtn').addEventListener('click', async function(){
+    if(!settings.apiKey){ $('testAiMsg').textContent = '請先填入金鑰'; return; }
+    $('testAiMsg').textContent = '測試中…';
+    try{ var t = await callLLM(settings.provider, settings.model || AI_PROVIDERS[settings.provider].defaultModel, settings.apiKey, '請只回覆兩個字：成功'); $('testAiMsg').textContent = '✅ 連線成功：' + t.slice(0, 20); }
+    catch(e){ $('testAiMsg').textContent = '❌ ' + (e.message || e); }
+  });
+  $('clearLocalBtn').addEventListener('click', function(){
+    var keys = [];
+    for(var i=0;i<localStorage.length;i++){ var k = localStorage.key(i); if(k && k.indexOf(PREFIX) === 0) keys.push(k); }
+    keys.forEach(function(k){ localStorage.removeItem(k); });
+    settings = loadSettings(); applySettings(); renderHistory();
+    toast('已清除 ' + keys.length + ' 項本機資料，設定已恢復預設');
+  });
+}
+
+/* ================= 事件 ================= */
+function init(){
+  $('fIndustry').innerHTML += Object.keys(B.INDUSTRIES).map(function(k){ return '<option value="' + k + '">' + B.INDUSTRIES[k].label + '</option>'; }).join('');
+  $('sampleChips').innerHTML = B.SAMPLES.map(function(s, i){ return '<button type="button" class="chip" data-sample="' + i + '">' + esc(s.product) + '</button>'; }).join('');
+  $('sampleChips').addEventListener('click', function(ev){
+    var b = ev.target.closest('[data-sample]'); if(!b) return;
+    var s = B.SAMPLES[Number(b.getAttribute('data-sample'))];
+    writeInput({fProduct:s.product, fIndustry:s.industry, fBiz:s.biz, fForm:s.form, fPrice:s.price, fTarget:s.target, fPain:s.pain, fResources:s.resources});
+    saveDraft(); toast('已帶入範例，按「產生商業模式」看結果');
+  });
+  initSettingsUi(); applySettings();
+  var dr = null;
+  try{ dr = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); }catch(e){}
+  if(dr) writeInput(dr); else writeInput(Object.assign({}, settings.formDefaults));
+  updateFinHints();
+  $('fillFinBtn').addEventListener('click', fillFinDefaults);
+  $('resetFormBtn').addEventListener('click', function(){ applyFormDefaults(); toast('已清空並套用常用預設值'); $('fProduct').focus(); });
+  $('saveDefaultsBtn').addEventListener('click', function(){
+    var inp = readInput(), d = {};
+    DEFAULT_KEYS.forEach(function(k){ d[k] = inp[k]; });
+    settings.formDefaults = d; saveSettings(); renderDefaultsSummary();
+    toast('已把目前的產業、客戶類型、型態、價格帶與財務數字存成常用預設');
+  });
+  $('resetDefaultsBtn').addEventListener('click', function(){
+    settings.formDefaults = Object.assign({}, DEFAULTS.formDefaults); saveSettings(); renderDefaultsSummary();
+    toast('已恢復內建預設');
+  });
+  INPUT_IDS.forEach(function(id){ $(id).addEventListener('input', saveDraft); $(id).addEventListener('change', saveDraft); });
+  $('genRuleBtn').addEventListener('click', generateRule);
+  $('genAiBtn').addEventListener('click', generateAi);
+  $('settingsBtn').addEventListener('click', function(){ openSettings(); });
+  $('historyBtn').addEventListener('click', function(){ var p = $('historyPanel'); var show = p.style.display !== 'block'; p.style.display = show ? 'block' : 'none'; if(show){ renderHistory(); p.scrollIntoView({behavior:'smooth', block:'start'}); } });
+  $('tabs').addEventListener('click', function(ev){
+    var b = ev.target.closest('[data-tab]'); if(!b) return;
+    activeTab = b.getAttribute('data-tab');
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.toggle('on', t === b); });
+    document.querySelectorAll('.tabpane').forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-pane') === activeTab); });
+  });
+  $('panes').addEventListener('click', function(ev){
+    var r = ev.target.closest('[data-regen]'); if(r){ regenSection(r.getAttribute('data-regen')); return; }
+    var f = ev.target.closest('#rankSeg button'); if(f){ rankFilter = f.getAttribute('data-f'); activeTab = 'rank'; renderResult(); }
+  });
+  $('panes').addEventListener('change', function(ev){ var id = ev.target.getAttribute('data-pick'); if(id) changeSelection(id, ev.target.checked); });
+  $('pdfBtn').addEventListener('click', function(){ buildPrintReport(); toast('請在列印視窗選擇「另存為 PDF」'); setTimeout(function(){ window.print(); }, 300); });
+  $('saveBtn').addEventListener('click', function(){ saveHistory(false); });
+  $('exportOneBtn').addEventListener('click', function(){ if(state) download('商業模式-' + state.ctx.product.slice(0,20) + '.json', JSON.stringify({app:'business-model-pattern-studio', items:[{name:state.ctx.product, time:state.time, state:snapshot()}]}, null, 2)); });
+  $('exportAllBtn').addEventListener('click', function(){ download('商業模式-歷史紀錄.json', JSON.stringify({app:'business-model-pattern-studio', items:loadHistory()}, null, 2)); });
+  $('importFile').addEventListener('change', function(){
+    var file = this.files[0]; if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try{
+        var data = JSON.parse(reader.result), items = Array.isArray(data) ? data : (data.items || []);
+        items = items.filter(function(x){ return x && x.state && x.state.input; });
+        if(!items.length) throw new Error('檔案中沒有可匯入的紀錄');
+        var h = loadHistory(); items.forEach(function(x){ h = h.filter(function(y){ return y.time !== x.time; }); h.unshift(x); });
+        storeHistory(h); renderHistory(); loadState(items[0].state);
+        toast('已匯入 ' + items.length + ' 筆，並開啟第一筆');
+      }catch(e){ toast('匯入失敗：' + (e.message || e)); }
+    };
+    reader.readAsText(file); this.value = '';
+  });
+  $('historyList').addEventListener('click', function(ev){
+    var l = ev.target.closest('[data-hload]'), d = ev.target.closest('[data-hdel]'), h = loadHistory();
+    if(l){ try{ loadState(h[Number(l.getAttribute('data-hload'))].state); $('result').scrollIntoView({behavior:'smooth'}); }catch(e){ toast('無法開啟：' + e.message); } }
+    if(d){ h.splice(Number(d.getAttribute('data-hdel')), 1); storeHistory(h); renderHistory(); }
+  });
+  initMarquee(); initPwa();
+}
+function saveDraft(){ try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(readInput())); }catch(e){} updateFinHints(); }
+
+/* ================= 常用預設值 ================= */
+var FIN_FIELDS = [['nPrice','price','單價'],['nCost','cost','成本'],['nCac','cac','獲客成本'],['nFreq','freq','年購買次數'],['nYears','years','留存年數'],['nFixed','fixed','月固定成本']];
+var DEFAULT_KEYS = ['fIndustry','fBiz','fForm','fPrice'].concat(FIN_FIELDS.map(function(f){ return f[0]; }));
+var LABELS = {fBiz:{b2c:'B2C',b2b:'B2B',both:'B2B＋B2C'}, fForm:{physical:'實體',digital:'數位',service:'服務',mixed:'混合'}, fPrice:{low:'平價',mid:'中價位',high:'高價位'}};
+function updateFinHints(){
+  var ind = industryOf(readInput()), I = B.INDUSTRIES[ind];
+  FIN_FIELDS.forEach(function(f){ $(f[0]).placeholder = '常用 ' + I.fin[f[1]].toLocaleString('zh-TW'); });
+  $('finHint').textContent = '依「' + I.label + '」產業' + ($('fIndustry').value ? '' : '（自動判斷）') + '的常用值；空白欄位會直接用這些數字估算';
+}
+function fillFinDefaults(){
+  var I = B.INDUSTRIES[industryOf(readInput())];
+  FIN_FIELDS.forEach(function(f){ $(f[0]).value = I.fin[f[1]]; });
+  saveDraft(); toast('已帶入「' + I.label + '」的常用財務數字，可再自行修改');
+}
+function applyFormDefaults(){
+  writeInput(Object.assign({}, settings.formDefaults));
+  saveDraft();
+}
+function renderDefaultsSummary(){
+  var d = settings.formDefaults, parts = [];
+  parts.push('產業：' + (d.fIndustry ? B.INDUSTRIES[d.fIndustry].label : '自動判斷'));
+  ['fBiz','fForm','fPrice'].forEach(function(k){ if(d[k]) parts.push(LABELS[k][d[k]]); });
+  var fin = FIN_FIELDS.filter(function(f){ return d[f[0]] !== undefined && d[f[0]] !== ''; }).map(function(f){ return f[2] + ' ' + d[f[0]]; });
+  parts.push(fin.length ? '財務：' + fin.join('、') : '財務：依產業常用值');
+  $('defaultsSummary').textContent = parts.join('｜');
+}
+
+window.__bmp = { computeRule:computeRule, readInput:readInput, getState:function(){ return state; }, applyAi:applyAi, buildPrintReport:buildPrintReport, overallOf:overallOf };
+init();
+})();
+</script>
+</body>
+</html>
