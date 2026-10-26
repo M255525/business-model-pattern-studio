@@ -29,4 +29,4 @@ localStorage 全部用 `bmPatternStudio.` 前綴（settings／history／draft／
 `window.__bmp`：`computeRule(input, selected?)`、`getState()`、`applyAi()`、`buildPrintReport()`、`overallOf()`。
 
 ## 部署
-GitHub Pages（`.github/workflows/deploy-pages.yml`，分支 master）。**使用者確認本機版沒問題後才建 repo 並推送。**
+2026-10-26 已上線：公開 repo `M255525/business-model-pattern-studio`，GitHub Pages https://m255525.github.io/business-model-pattern-studio/ （Actions workflow `deploy-pages.yml`，分支 master，push 即自動部署）。已加入程式牆與 github-dashboard 的 `REPO_META`。
