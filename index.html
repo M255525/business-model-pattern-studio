@@ -287,8 +287,7 @@ footer{display:flex;flex-direction:column;gap:14px;}
           <label>情境<select data-count="context"></select></label>
         </div></div>
       <div class="set-row"><label class="inline"><input type="checkbox" id="setExt"> 納入延伸模式（15 個）</label>
-        <label class="inline"><input type="checkbox" id="setAutoSave"> 產生後自動存入歷史紀錄</label>
-        <label class="inline"><input type="checkbox" id="setMarquee"> 顯示頂部跑馬燈公告</label></div>
+        <label class="inline"><input type="checkbox" id="setAutoSave"> 產生後自動存入歷史紀錄</label></div>
     </div>
     <h3>要產出的評價</h3>
     <div class="eval-checks" id="evalChecks"></div>
@@ -1200,7 +1199,7 @@ function initMarquee(){
     if(lastIndex < text.length) container.appendChild(document.createTextNode(text.slice(lastIndex)));
   }
   function render(items){
-    if(!settings.marquee || !items || !items.length) return;
+    if(false /* 跑馬燈為必備，不可關閉 */ || !items || !items.length) return;
     var key = JSON.stringify(items);
     if(key === lastKey) return;
     lastKey = key; track.innerHTML = '';
@@ -1212,14 +1211,14 @@ function initMarquee(){
     track.style.animationDuration = Math.max(track.scrollWidth / 2 / 80, 10) + 's';
   }
   function fetchMarquee(){
-    if(!settings.marquee) return;
+    if(false /* 跑馬燈為必備，不可關閉 */) return;
     fetch(MARQUEE_CHECK_URL, {method:'POST', body:JSON.stringify({serial:''})})
       .then(function(r){ return r.json(); })
       .then(function(data){ if(data && Array.isArray(data.marquee) && data.marquee.length){ saveCache(data.marquee); render(data.marquee); } })
       .catch(function(){});
   }
   window.__applyMarquee = function(){
-    if(!settings.marquee){ bar.classList.remove('show'); document.body.classList.remove('has-marquee'); lastKey = null; }
+    if(false /* 跑馬燈為必備，不可關閉 */){ bar.classList.remove('show'); document.body.classList.remove('has-marquee'); lastKey = null; }
     else { render(loadCache()); fetchMarquee(); }
   };
   render(loadCache()); fetchMarquee(); setInterval(fetchMarquee, REFRESH_MS);
@@ -1262,7 +1261,7 @@ function applySettings(){
   if(settings.fs) document.body.classList.add('fs-' + settings.fs);
   Array.prototype.forEach.call($('fsSeg').children, function(b){ b.classList.toggle('on', b.getAttribute('data-fs') === (settings.fs || '')); });
   document.querySelectorAll('[data-count]').forEach(function(sel){ sel.value = String(settings.counts[sel.getAttribute('data-count')]); });
-  $('setExt').checked = !!settings.includeExt; $('setAutoSave').checked = !!settings.autoSave; $('setMarquee').checked = !!settings.marquee;
+  $('setExt').checked = !!settings.includeExt; $('setAutoSave').checked = !!settings.autoSave;
   $('setAuthor').value = settings.author || ''; $('setWatermark').checked = !!settings.watermark; $('setAppendix').checked = !!settings.appendix;
   document.querySelectorAll('[data-eval]').forEach(function(cb){ cb.checked = !!settings.evals[cb.getAttribute('data-eval')]; });
   var providerSel = $('aiProvider');
@@ -1288,7 +1287,6 @@ function initSettingsUi(){
   $('fsSeg').addEventListener('click', function(ev){ var b = ev.target.closest('button'); if(!b) return; settings.fs = b.getAttribute('data-fs'); saveSettings(); applySettings(); });
   $('setExt').addEventListener('change', function(){ settings.includeExt = this.checked; saveSettings(); if(state) { state = computeRule(state.input, state.selected.filter(function(id){ return settings.includeExt || BYID[id].book; })); renderResult(); } });
   $('setAutoSave').addEventListener('change', function(){ settings.autoSave = this.checked; saveSettings(); });
-  $('setMarquee').addEventListener('change', function(){ settings.marquee = this.checked; saveSettings(); if(window.__applyMarquee) window.__applyMarquee(); });
   $('setAuthor').addEventListener('input', function(){ settings.author = this.value.trim(); saveSettings(); });
   $('setWatermark').addEventListener('change', function(){ settings.watermark = this.checked; saveSettings(); });
   $('setAppendix').addEventListener('change', function(){ settings.appendix = this.checked; saveSettings(); });
