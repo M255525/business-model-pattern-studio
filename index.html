@@ -974,7 +974,7 @@ function gradeOf(s){ return s >= 80 ? 'a' : s >= 65 ? 'b' : s >= 50 ? 'c' : 'd';
 var GRADE_LABEL = {a:'優異', b:'良好', c:'普通', d:'待加強'};
 function badge(src){ return src === 'ai' ? '<span class="src-badge ai">AI</span>' : src === 'mixed' ? '<span class="src-badge ai">AI＋規則式</span>' : '<span class="src-badge rule">規則式</span>'; }
 function stars(n){ return '★★★★★'.slice(0,n) + '☆☆☆☆☆'.slice(0,5-n); }
-function pill(id){ var p = BYID[id]; return '<span class="pill ' + p.cat + '">' + (p.no ? '<i>#' + p.no + '</i>' : '<i>延伸</i>') + esc(p.name) + '</span>'; }
+function pill(id){ var p = BYID[id]; return '<span class="pill ' + p.cat + '">' + (p.no ? '' : '<i>延伸</i>') + esc(p.name) + '</span>'; }
 function fmt(n){ return isFinite(n) ? Math.round(n).toLocaleString('zh-TW') : '—'; }
 
 function radarSvg(dims){
@@ -1069,13 +1069,13 @@ function htmlRank(s){
   var rows = s.ranking.filter(function(r){ return rankFilter === 'all' || BYID[r.id].cat === rankFilter; }).map(function(r, i){
     var p = BYID[r.id], on = s.selected.indexOf(p.id) >= 0;
     return '<tr class="' + (on ? 'sel' : '') + '"><td><input type="checkbox" data-pick="' + p.id + '"' + (on ? ' checked' : '') + ' aria-label="選用 ' + esc(p.name) + '"></td>'
-      + '<td>' + (p.no ? '#' + p.no : '<span class="ext-tag">延伸</span>') + '</td>'
+      + '<td>' + (p.no ? '經典' : '<span class="ext-tag">延伸</span>') + '</td>'
       + '<td><details><summary>' + esc(p.name) + '</summary><div>' + esc(p.desc) + '<br>👉 ' + esc(fill(p.how, s.ctx)) + '<br>✅ ' + esc(p.pro) + '<br>⚠️ ' + esc(p.risk) + '<br>🏢 ' + esc(p.examples.join('、')) + '</div></details>'
       + '<span class="pdesc">' + esc(p.en) + '</span></td>'
       + '<td class="hide-m">' + B.CAT_LABEL[p.cat] + '</td>'
       + '<td><span class="fitbar"><i style="width:' + r.fit + '%"></i></span> ' + r.fit + '</td></tr>';
   }).join('');
-  return tools + '<table class="rank-table"><thead><tr><th>選用</th><th>編號</th><th>模式</th><th class="hide-m">類別</th><th>適配度</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  return tools + '<table class="rank-table"><thead><tr><th>選用</th><th>類型</th><th>模式</th><th class="hide-m">類別</th><th>適配度</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
 var PANES = {
   bmc:{title:'商業模式圖', html:htmlBmc, regen:true}, dims:{title:'六構面雷達', html:htmlDims, regen:true},
@@ -1131,7 +1131,7 @@ function buildPrintReport(){
   enabledEvals().forEach(function(id){
     if(id === 'rank'){
       html += '<div class="pr-sec"><h2>模式適配排名（前 15 名）</h2><table><tr><th>名次</th><th>模式</th><th>類別</th><th>適配度</th><th>選用</th></tr>'
-        + s.ranking.slice(0,15).map(function(r,i){ var p = BYID[r.id]; return '<tr><td>' + (i+1) + '</td><td>' + esc(p.name) + (p.no ? '（#' + p.no + '）' : '（延伸）') + '</td><td>' + B.CAT_LABEL[p.cat] + '</td><td>' + r.fit + '</td><td>' + (s.selected.indexOf(p.id) >= 0 ? '✔' : '') + '</td></tr>'; }).join('') + '</table></div>';
+        + s.ranking.slice(0,15).map(function(r,i){ var p = BYID[r.id]; return '<tr><td>' + (i+1) + '</td><td>' + esc(p.name) + (p.no ? '' : '（延伸）') + '</td><td>' + B.CAT_LABEL[p.cat] + '</td><td>' + r.fit + '</td><td>' + (s.selected.indexOf(p.id) >= 0 ? '✔' : '') + '</td></tr>'; }).join('') + '</table></div>';
     } else {
       html += '<div class="pr-sec"><h2>' + PANES[id].title + '</h2>' + PANES[id].html(s) + '</div>';
     }
